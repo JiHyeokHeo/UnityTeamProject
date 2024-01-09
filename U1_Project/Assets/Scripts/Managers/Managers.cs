@@ -7,6 +7,9 @@ public class Managers : MonoBehaviour
     static Managers s_instance;
     public static Managers Instance { get { Init(); return s_instance; } }
 
+    MonsterAIManager _monsterAI = new MonsterAIManager();
+    public static MonsterAIManager MonsterAI { get { return Instance._monsterAI; } }
+
     void Start()
     {
         Init();
@@ -14,7 +17,7 @@ public class Managers : MonoBehaviour
 
     void Update()
     {
-        
+        _monsterAI.OnUpdate();
     }
 
     static void Init()
