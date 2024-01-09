@@ -6,8 +6,8 @@ using UnityEngine;
 public class MonsterAIManager
 {
     public List<Action> MonsterActions = new List<Action>(5);
-    public List<GameObject> playermonsters;
-    public List<GameObject> enemymonsters;
+    public List<GameObject> playermonsters = new List<GameObject>();
+    public List<GameObject> enemymonsters = new List<GameObject>();
 
     public void GetMonstersInfo()
     {
