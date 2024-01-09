@@ -26,7 +26,7 @@ public class MonsterAIManager
 
         if (MonsterActions != null)
         {
-            MonsterActions[0].Invoke();
+            //MonsterActions[0].Invoke();
         }
     }
 }
