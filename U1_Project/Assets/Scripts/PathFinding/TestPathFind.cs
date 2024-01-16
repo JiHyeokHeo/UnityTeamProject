@@ -63,7 +63,8 @@ public class TestPathFind : MonoBehaviour
                 return;
             }
 
-            foreach (Node neighbour in grid.GetNeighbours(currentNode))
+            List<Node> nodeNeigbours = grid.GetNeighbours(currentNode);
+            foreach (Node neighbour in nodeNeigbours)
             {
                 if(!neighbour._walkable || closedSet.Contains(neighbour))
                     continue;
