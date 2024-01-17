@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UI_Button : UI_Base
+public class UI_Button : UI_Popup
 {
     enum Buttons
     {
@@ -31,6 +31,12 @@ public class UI_Button : UI_Base
 
     private void Start()
     {
+        Init();
+    }
+
+    public override void Init()
+    {
+        base.Init();
         // 리플렉션
         Bind<Button>(typeof(Buttons));
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -38,18 +44,17 @@ public class UI_Button : UI_Base
         Bind<Image>(typeof(Images));
 
         //Get<TextMeshProUGUI>((int)Texts.ScoreText).text = "Bind Test";
-        GetText((int)Texts.ScoreText).text = "Bind Test";
+        GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
 
         GameObject obj = GetImage((int)Images.ItemIcon).gameObject;
-        UI_EventHandler evt = obj.GetComponent<UI_EventHandler>();
-        evt.OnDragHandler += ((PointerEventData data) => { evt.gameObject.transform.position = data.position; });
+        AddUIEvent(obj, (PointerEventData data) => { obj.gameObject.transform.position = data.position; }, Define.UIEvent.Drag);
     }
 
-   
     int _score = 0;
 
-    public void OnButtonClicked()
+    public void OnButtonClicked(PointerEventData data)
     {
         _score++;
+        GetText((int)Texts.ScoreText).text = $"Score : {_score}";
     }
 }
