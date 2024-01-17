@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Monster_Selector_Monster : UI_Base
+public class UI_Monster_Icon : UI_Base
 {
     enum GameObjects
     {

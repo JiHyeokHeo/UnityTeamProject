@@ -37,12 +37,16 @@ public class UIManager
         }
     }
 
-    public T MakeSubMonster<T>(string name = null) where T : UI_Base
+    public T MakeSubMonster<T>(Transform parent = null, string name = null) where T : UI_Base
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
         GameObject obj = Managers.Resource.Instantiate($"UI/SubMonster/{name}");
+
+        if (parent != null)
+            obj.transform.SetParent(parent);
+
         return Util.GetOrAddComponent<T>(obj);
     }
 
