@@ -25,10 +25,13 @@ public class PlayerController : MonoBehaviour
         Managers.Input.MouseAction += OnMouseClicked;
 
         //Managers.Resource.Instantiate("UI/UI_Button");
-        
-        Managers.UI.ShowPopupUI<UI_Button>();
+
+        //Managers.UI.ShowPopupUI<UI_Button>();
 
         //Managers.UI.ClosePopupUI(button);
+
+        Managers.UI.ShowSceneUI<UI_Monster_Selector>();
+        
     }
 
     void UpdateDie()

@@ -44,10 +44,10 @@ public class UI_Button : UI_Popup
         Bind<Image>(typeof(Images));
 
         //Get<TextMeshProUGUI>((int)Texts.ScoreText).text = "Bind Test";
-        GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
+        GetButton((int)Buttons.PointButton).gameObject.BindEvent(OnButtonClicked);
 
-        GameObject obj = GetImage((int)Images.ItemIcon).gameObject;
-        AddUIEvent(obj, (PointerEventData data) => { obj.gameObject.transform.position = data.position; }, Define.UIEvent.Drag);
+        //GameObject obj = GetImage((int)Images.ItemIcon).gameObject;
+        //BindEvent(obj, (PointerEventData data) => { obj.gameObject.transform.position = data.position; }, Define.UIEvent.Drag);
     }
 
     int _score = 0;
