@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
         //Managers.UI.ClosePopupUI(button);
 
-        Managers.UI.ShowSceneUI<UI_Monster_Selector>();
+        
         
     }
 
