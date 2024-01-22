@@ -13,6 +13,7 @@ public class Managers : MonoBehaviour
     SceneManagerEX _scene = new SceneManagerEX();
     SoundManager _sound = new SoundManager();
     PoolManager _pool = new PoolManager();
+    DataManager _data = new DataManager();
 
     public static InputManager Input { get { return Instance._input; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
@@ -20,6 +21,7 @@ public class Managers : MonoBehaviour
     public static SceneManagerEX Scene { get { return Instance._scene; } }
     public static SoundManager Sound { get { return Instance._sound; } }
     public static PoolManager Pool { get { return Instance._pool; } }
+    public static DataManager Data { get { return Instance._data; } }
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(obj);
             s_instance = obj.GetComponent<Managers>();
 
+            s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();
         }

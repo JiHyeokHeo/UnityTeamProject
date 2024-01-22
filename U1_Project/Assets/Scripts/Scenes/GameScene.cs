@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
+    Coroutine co;
+
     protected override void Init()
     {
         base.Init();
@@ -12,8 +14,16 @@ public class GameScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_Monster_Selector>();
 
-        for (int i = 0; i < 5; i++)
-            Managers.Resource.Instantiate("Knight");
+        Dictionary<int, Stat> dict = Managers.Data.StatDict;
+        
+        //co = StartCoroutine("ExplodeAfterSeconds", 4.0f);
+    }
+
+    IEnumerator ExplodeAfterSeconds(float seconds)
+    {
+        Debug.Log("Explode Enter");
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("Explode Execute!!!");
     }
 
     public override void Clear()
