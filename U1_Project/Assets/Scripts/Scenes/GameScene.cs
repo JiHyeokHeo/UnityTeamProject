@@ -11,6 +11,9 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Play;
 
         Managers.UI.ShowSceneUI<UI_Monster_Selector>();
+
+        for (int i = 0; i < 5; i++)
+            Managers.Resource.Instantiate("Knight");
     }
 
     public override void Clear()
