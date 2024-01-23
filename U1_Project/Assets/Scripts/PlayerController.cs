@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController
 {
     [SerializeField]
     float _speed = 10.0f;
@@ -15,56 +15,34 @@ public class PlayerController : MonoBehaviour
         Channeling,
     }
 
-    PlayerState _state = PlayerState.Idle;
-
-    void Start()
+    public override void Init()
     {
+        WorldObjectType = Define.WorldObject.Player;
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
-
         //Managers.Resource.Instantiate("UI/UI_Button");
 
         //Managers.UI.ShowPopupUI<UI_Button>();
 
         //Managers.UI.ClosePopupUI(button);
 
-        
-        
     }
 
-    void UpdateDie()
+    protected override void UpdateDie()
     {
         // 아무것도 못함
     }
 
-    void UpdateMoving()
+    protected override void UpdateMoving()
     {
 
     }
 
-    void UpdateIdle()
+    protected override void UpdateIdle()
     {
 
-    }
-
-    void Update()
-    {
-        switch (_state)
-        {
-            case PlayerState.Die:
-                UpdateDie();
-                break;
-            case PlayerState.Moving:
-                UpdateMoving();
-                break;
-            case PlayerState.Idle:
-                UpdateIdle();
-                break;
-
-        }
-        
     }
 
     void OnKeyboard()

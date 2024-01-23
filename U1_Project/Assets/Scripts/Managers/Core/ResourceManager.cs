@@ -41,6 +41,7 @@ public class ResourceManager
         return obj;
     }
 
+    // 직접 리소스매니저에 접근해서 지우지 마세요! 생명주기랑 관련이 있으므로 건드리면 안됩니다 !
     public void Destroy(GameObject obj)
     {
         if (obj == null)
