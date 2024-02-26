@@ -26,3 +26,17 @@ C:\Unity\Project\Server\PacketGenerator\obj\Debug\refint\PacketGenerator.dll
 C:\Unity\Project\Server\PacketGenerator\obj\Debug\PacketGenerator.pdb
 C:\Unity\Project\Server\PacketGenerator\obj\Debug\PacketGenerator.genruntimeconfig.cache
 C:\Unity\Project\Server\PacketGenerator\obj\Debug\ref\PacketGenerator.dll
+C:\Unity\Project\U1_Project\Server\PacketGenerator\bin\PacketGenerator.exe
+C:\Unity\Project\U1_Project\Server\PacketGenerator\bin\PacketGenerator.deps.json
+C:\Unity\Project\U1_Project\Server\PacketGenerator\bin\PacketGenerator.runtimeconfig.json
+C:\Unity\Project\U1_Project\Server\PacketGenerator\bin\PacketGenerator.dll
+C:\Unity\Project\U1_Project\Server\PacketGenerator\bin\PacketGenerator.pdb
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfoInputs.cache
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfo.cs
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.CoreCompileInputs.cache
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.dll
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\refint\PacketGenerator.dll
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.pdb
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\PacketGenerator.genruntimeconfig.cache
+C:\Unity\Project\U1_Project\Server\PacketGenerator\obj\Debug\ref\PacketGenerator.dll

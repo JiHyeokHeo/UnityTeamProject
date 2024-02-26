@@ -22,7 +22,7 @@ namespace DummyClient
 
         public override void OnReceivePacket(ArraySegment<byte> buffer)
         {
-            PacketManager.Instance.OnReceivePacket(this, buffer);
+            PacketManager.Instance.OnReceivePacket(this, buffer, (s, p) => PacketQueue.Instance.Push(p));
         }
 
         // 이동 패킷 ((3,2)~~ 좌표로 이동하고 싶다!)

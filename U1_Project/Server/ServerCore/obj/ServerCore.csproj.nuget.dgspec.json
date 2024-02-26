@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Unity\\Project\\Server\\ServerCore\\ServerCore.csproj": {}
+    "C:\\Unity\\Project\\U1_Project\\Server\\ServerCore\\ServerCore.csproj": {}
   },
   "projects": {
-    "C:\\Unity\\Project\\Server\\ServerCore\\ServerCore.csproj": {
+    "C:\\Unity\\Project\\U1_Project\\Server\\ServerCore\\ServerCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Unity\\Project\\Server\\ServerCore\\ServerCore.csproj",
+        "projectUniqueName": "C:\\Unity\\Project\\U1_Project\\Server\\ServerCore\\ServerCore.csproj",
         "projectName": "ServerCore",
-        "projectPath": "C:\\Unity\\Project\\Server\\ServerCore\\ServerCore.csproj",
+        "projectPath": "C:\\Unity\\Project\\U1_Project\\Server\\ServerCore\\ServerCore.csproj",
         "packagesPath": "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\",
-        "outputPath": "C:\\Unity\\Project\\Server\\ServerCore\\obj\\",
+        "outputPath": "C:\\Unity\\Project\\U1_Project\\Server\\ServerCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

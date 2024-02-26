@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Unity\\Project\\Server\\PacketGenerator\\PacketGenerator.csproj": {}
+    "C:\\Unity\\Project\\U1_Project\\Server\\PacketGenerator\\PacketGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Unity\\Project\\Server\\PacketGenerator\\PacketGenerator.csproj": {
+    "C:\\Unity\\Project\\U1_Project\\Server\\PacketGenerator\\PacketGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Unity\\Project\\Server\\PacketGenerator\\PacketGenerator.csproj",
+        "projectUniqueName": "C:\\Unity\\Project\\U1_Project\\Server\\PacketGenerator\\PacketGenerator.csproj",
         "projectName": "PacketGenerator",
-        "projectPath": "C:\\Unity\\Project\\Server\\PacketGenerator\\PacketGenerator.csproj",
+        "projectPath": "C:\\Unity\\Project\\U1_Project\\Server\\PacketGenerator\\PacketGenerator.csproj",
         "packagesPath": "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\",
-        "outputPath": "C:\\Unity\\Project\\Server\\PacketGenerator\\obj\\",
+        "outputPath": "C:\\Unity\\Project\\U1_Project\\Server\\PacketGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
