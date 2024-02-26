@@ -12,6 +12,12 @@ namespace Server
     {
         public int SessionId { get; set; }
         public GameRoom Room { get; set; }
+        public float PosX { get; set; }
+        public float PosY { get; set; }
+        public float PosZ { get; set; }
+        public float RotationX { get; set; }
+        public float RotationY { get; set; }
+        public float RotationZ { get; set; }
 
         public override void OnConnected(EndPoint endPoint)
         {
