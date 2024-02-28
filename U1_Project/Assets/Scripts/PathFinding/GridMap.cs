@@ -8,11 +8,11 @@ public class GridMap : MonoBehaviour
     public LayerMask _unwalkableMask;
     public Vector2 _gridWorldSize;
     public float _nodeRadius;
-    Node[,] _grid; // 2차원 배열
+    public Node[,] _grid; // 2차원 배열
 
     // 지름
     float _nodeDiameter;
-    int _gridSizeX, _gridSizeY;
+    public int _gridSizeX, _gridSizeY;
 
     private void Start()
     {
