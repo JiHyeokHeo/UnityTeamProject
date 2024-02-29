@@ -17,10 +17,12 @@ public class TestEditor
     [MenuItem("Tools/GenerateMap %#t")]
     private static void GenerateMap()
     {
-        GameObject[] gameObjects = Resources.LoadAll<GameObject>("Prefabs/Map");
 
-        foreach (GameObject go in gameObjects)
-        {
+        //GameObject[] gameObjects = Resources.LoadAll<GameObject>("Prefabs/Map");
+        GameObject go = GameObject.Find("Astar");
+
+        //foreach (GameObject go in gameObjects)
+        //{
             GridMap gm = Util.GetOrAddComponent<GridMap>(go);
 
             using (var writer = File.CreateText($"Assets/Resources/Map/{go.name}.txt"))
@@ -41,7 +43,7 @@ public class TestEditor
                 }
 
             }
-        }
+        //}
    
     }
 

@@ -28,7 +28,6 @@ public class MonsterController : BaseController
 
     void Update()
     {
-
         UpdatePosition();
         UpdateMovingCheck();
     
