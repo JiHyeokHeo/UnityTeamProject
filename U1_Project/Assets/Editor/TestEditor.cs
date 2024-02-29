@@ -17,32 +17,32 @@ public class TestEditor
     [MenuItem("Tools/GenerateMap %#t")]
     private static void GenerateMap()
     {
-        GameObject obj = GameObject.Find("Astar");
-        if (obj == null)
-            return;
+        GameObject[] gameObjects = Resources.LoadAll<GameObject>("Prefabs/Map");
 
-        GridMap gm = Util.GetOrAddComponent<GridMap>(obj);
-        if (gm == null)
-            return;
-
-        using (var writer = File.CreateText("Assets/Resources/Map/output.txt"))
+        foreach (GameObject go in gameObjects)
         {
-            writer.WriteLine(gm._gridSizeX);
-            writer.WriteLine(gm._gridSizeY);
+            GridMap gm = Util.GetOrAddComponent<GridMap>(go);
 
-            for (int y = gm._gridSizeY - 1; y >= 0; y--)
+            using (var writer = File.CreateText($"Assets/Resources/Map/{go.name}.txt"))
             {
-                for (int x = 0; x < gm._gridSizeX; x++)
-                {
-                    if (gm._grid[x, y]._walkable == false)
-                        writer.Write("1");
-                    else
-                        writer.Write("0");
-                }
-                writer.WriteLine();
-            }
+                writer.WriteLine(gm._gridSizeX);
+                writer.WriteLine(gm._gridSizeY);
 
+                for (int y = gm._gridSizeY - 1; y >= 0; y--)
+                {
+                    for (int x = 0; x < gm._gridSizeX; x++)
+                    {
+                        if (gm._grid[x, y]._walkable == false)
+                            writer.Write("1");
+                        else
+                            writer.Write("0");
+                    }
+                    writer.WriteLine();
+                }
+
+            }
         }
+   
     }
 
 #endif

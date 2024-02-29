@@ -15,7 +15,10 @@ public class GameScene : BaseScene
         Managers.UI.ShowSceneUI<UI_Monster_Selector>();
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        
+
+        //Managers.Resource.Instantiate("Seeker");
+        //Managers.Resource.Instantiate("Target");
+        //Managers.Resource.Instantiate("Map/Astar");
         //co = StartCoroutine("ExplodeAfterSeconds", 4.0f);
     }
 

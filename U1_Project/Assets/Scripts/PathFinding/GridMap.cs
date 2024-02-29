@@ -14,7 +14,7 @@ public class GridMap : MonoBehaviour
     float _nodeDiameter;
     public int _gridSizeX, _gridSizeY;
 
-    private void Start()
+    private void Awake()
     {
         _nodeDiameter = _nodeRadius * 2;
         _gridSizeX = Mathf.RoundToInt(_gridWorldSize.x / _nodeDiameter); // X Ä­¼ö 
@@ -96,7 +96,7 @@ public class GridMap : MonoBehaviour
                     if (_path.Contains(node))
                         Gizmos.color = Color.black;
 
-                Gizmos.DrawCube(node._worldPosition, Vector3.one * (_nodeDiameter - 0.01f));
+                Gizmos.DrawCube(node._worldPosition, Vector3.one * (_nodeDiameter) - new Vector3(0.0f, 9.0f, 0.0f));
             }
         }
     }

@@ -23,6 +23,7 @@ public class TestPathFind : MonoBehaviour
 
     private void Awake()
     {
+        
         grid = GetComponent<GridMap>();
     }
 
