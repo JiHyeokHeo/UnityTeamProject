@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 
 
@@ -45,9 +46,11 @@ public enum JobThema
     TANKER,
 }
 
-
 public class Champion : Unit
 {
+    //공격사거리(근거리는 짧게, 원거리는 길게 보다 작거나 같을때 공격가능)
+    private float range_Attack;
+
     //마나통
     private float mana_max;
 
@@ -76,5 +79,45 @@ public class Champion : Unit
 
     //iDrag 같은거 써서 챔피언을 드래그 할 때 관련함수 만들어야함
 
+    // 스킬 Action을 추가해서 + 한다음 캐릭터 생성할때 추가해주는 매서드가 필요하겠네
+    // 캐릭 생성기능어디서할껀지 
+    
+    
+    #region GetSet
+
+    public float Range_Attack { get { return range_Attack; } private set { range_Attack = value; } }
+
+    public float Mana_max { get { return mana_max; } private set { mana_max = value; } }
+
+    public float Mana_regen { get { return mana_regen; } private set { mana_regen = value; } }
+
+    public float Critical { get { return critical; } private set { critical = value; } }
+    public int StarPoint { get { return starPoint; } private set { starPoint = value; } }
+
+    public int Price { get { return price; } private set { price = value; } }
+    
+    #endregion 
+
+    public void JaxW() { 
+        //particle system
+        // 추가피해량을 늘려야함, -> 적이있는 자료구조에서 적을 찾고 -> 적을 찾으면 다가가고 -> 적을 때렸다는걸 서버로 보내주는 코드짜고
+        // -> 소리, 파티클, 이미지 -> 맞은애의 object -> 
+        // 추가적인 데미지를 주어야함
+        
+    }
+
+
+    public void JaxQ()
+    {
+        //particle system
+
+        // 추가적인 데미지를 주어야함
+
+    }
+
 
 }
+
+
+
+

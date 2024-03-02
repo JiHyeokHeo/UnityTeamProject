@@ -23,7 +23,23 @@ public abstract class Unit : MonoBehaviour
     public virtual void UnitMove(Transform pos) { }
 
     /// <summary>
-    /// 적을 찾는 기능
+    /// 컨테이너 돌면서 가장 가까운 적을 찾는 기능 //매개변수로 매니저의 컨테이너를 찾아야함
     /// </summary>
-    public virtual void FindEnemy() { }
+    public virtual Champion FindTarget() {
+        Champion temp = new Champion();
+        
+        return temp;
+    }
+
+    /// <summary>
+    /// 기본공격
+    /// </summary>
+    public virtual void DefaultAttack() {
+        // 적을 찾음
+        Champion target = FindTarget();
+
+        // 
+
+
+    }
 }
