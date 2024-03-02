@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sDQ54fw2AZizMFPe47l/l+O06WKss3WB2n+I0FLw56Qx+OJTDPIbHbCW4HB66PAeu2y0KizFzWZ+Meiy/bOLNg==",
+  "dgSpecHash": "tCawt4HvhkeGkdZQSxVSLCFcS4TWRX4+Eq6grxX+MPGXzVvHcB3lPtWCDWd7q+rLS0D9Ty08xnv6dUCSABuQfw==",
   "success": true,
   "projectFilePath": "C:\\Unity\\Project\\Server\\ServerCore\\ServerCore.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+  ],
   "logs": []
 }

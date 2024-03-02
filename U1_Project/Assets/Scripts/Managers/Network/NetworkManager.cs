@@ -1,4 +1,4 @@
-using DummyClient;
+using Google.Protobuf;
 using ServerCore;
 using System;
 using System.Collections;
@@ -15,7 +15,7 @@ public class NetworkManager : MonoBehaviour
         _session.Send(sendBuff);
     }
 
-    void Start()
+    public void Init()
     {
         // DNS (Domain Name System)
         string host = Dns.GetHostName();
@@ -26,16 +26,19 @@ public class NetworkManager : MonoBehaviour
         Connector connector = new Connector();
 
         connector.Connect(endPoint,
-            () => { return _session; }, 1);
+            () => { return _session; },
+            1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        List<IPacket> list = PacketQueue.Instance.PopAll();
-        foreach (IPacket packet in list)
-            PacketManager.Instance.HandlePacket(_session, packet);
+        List<PacketMessage> list = PacketQueue.Instance.PopAll();
+        foreach (PacketMessage packet in list)
+        {
+            Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(packet.Id);
+            if (handler != null)
+                handler.Invoke(_session, packet.Message);
+        }
     }
-
 
 }

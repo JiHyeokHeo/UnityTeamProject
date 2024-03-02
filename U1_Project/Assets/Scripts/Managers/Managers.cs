@@ -9,6 +9,7 @@ public class Managers : MonoBehaviour
 
     #region Contents
     GameManager _game = new GameManager();
+    NetworkManager _network = new NetworkManager();
 
     public static GameManager Game { get { return Instance._game; } }
     #endregion
@@ -30,6 +31,7 @@ public class Managers : MonoBehaviour
     public static SoundManager Sound { get { return Instance._sound; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static DataManager Data { get { return Instance._data; } }
+    public static NetworkManager Network { get { return Instance._network; } }
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class Managers : MonoBehaviour
 
     void Update()
     {
+        _network.Update();
         _input.OnUpdate();
     }
 
@@ -55,6 +58,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(obj);
             s_instance = obj.GetComponent<Managers>();
 
+            s_instance._network.Init();
             s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();
