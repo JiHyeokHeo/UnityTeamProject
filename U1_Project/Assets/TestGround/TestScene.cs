@@ -33,7 +33,22 @@ public class TestScene : BaseScene
     #endregion
 
     //co = StartCoroutine("ExplodeAfterSeconds", 4.0f);
-}
+    }
+
+    private void Start()
+    {
+
+
+        Managers.Pool.Init();
+        //Debug.Log("ㅇ");
+
+        GameObject ob = Managers.Resource.Load<GameObject>("TestPref/TestMob");
+        Debug.Log(ob);
+        //몬스터 풀을 만들어야해 //풀매니저보다 더 빨리호출됨
+        //Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Assets/TestGround/TestMob.prefab"));
+        //
+    }
+
 
     IEnumerator Tset(float seconds)
     {
