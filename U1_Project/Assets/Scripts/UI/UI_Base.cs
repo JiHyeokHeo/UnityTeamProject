@@ -15,13 +15,14 @@ public abstract class UI_Base : MonoBehaviour
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
         string[] names = Enum.GetNames(type);
+        
         UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
         _objects.Add(typeof(T), objects);
 
         for (int i = 0; i < names.Length; i++)
         {
             if (typeof(T) == typeof(GameObject))
-                objects[i] = Util.FindChild(gameObject, names[i], true);
+                objects[i] = Util.FindChild (gameObject, names[i], true);
             else
                 objects[i] = Util.FindChild<T>(gameObject, names[i], true);
 
