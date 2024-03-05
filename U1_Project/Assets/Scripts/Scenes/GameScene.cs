@@ -12,7 +12,7 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Play;
 
-        Managers.UI.ShowSceneUI<UI_Monster_Selector>();
+        //Managers.UI.ShowSceneUI<UI_Monster_Selector>();
 
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
 
