@@ -4,6 +4,10 @@ using UnityEngine;
 
 public abstract class BaseController : MonoBehaviour
 {
+    public int Id { get; set; }
+
+    public Vector3Int CellPos { get; set; } = Vector3Int.zero;
+
     protected GameObject _lockTarget;
 
     public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;

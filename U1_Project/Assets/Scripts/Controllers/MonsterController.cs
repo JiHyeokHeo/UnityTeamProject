@@ -8,12 +8,15 @@ public class MonsterController : BaseController
     public GridMap _gridMap;
     public float _speed = 5.0f;
 
-    Vector3Int _cellPos = Vector3Int.zero;
     MoveDir _dir = MoveDir.None;
     bool _isMoving = false;
 
     public override void Init()
     {
+        GameObject obj = GameObject.Find("Astar");
+        GameObject obj2 = GameObject.Find("Seeker");
+        _gridMap = obj.GetComponent<GridMap>();
+        _gridMap.player = obj2.transform;
         WorldObjectType = Define.WorldObject.Monster;
         Managers.Input.KeyAction -= GetDirOrder;
         Managers.Input.KeyAction += GetDirOrder;
@@ -22,7 +25,7 @@ public class MonsterController : BaseController
     void Start()
     {
         Init();
-        Node node = _gridMap.NodeFromWorldPoint(_cellPos);
+        Node node = _gridMap.NodeFromWorldPoint(CellPos);
         transform.position = node._worldPosition;
     }
 
@@ -63,7 +66,7 @@ public class MonsterController : BaseController
         if (_isMoving == false)
             return;
 
-        Node node = _gridMap.NodeFromWorldPoint(_cellPos);
+        Node node = _gridMap.NodeFromWorldPoint(CellPos);
         Vector3 destPos = node._worldPosition;
         Vector3 moveDir = destPos - transform.position;
 
@@ -90,19 +93,19 @@ public class MonsterController : BaseController
             switch (_dir)
             {
                 case MoveDir.Up:
-                    _cellPos += new Vector3Int(0, 0, 1);
+                    CellPos += new Vector3Int(0, 0, 1);
                     _isMoving = true;
                     break;
                 case MoveDir.Left:
-                    _cellPos += Vector3Int.left;
+                    CellPos += Vector3Int.left;
                     _isMoving = true;
                     break;
                 case MoveDir.Right:
-                    _cellPos += Vector3Int.right;
+                    CellPos += Vector3Int.right;
                     _isMoving = true;
                     break;
                 case MoveDir.Down:
-                    _cellPos += new Vector3Int(0, 0, -1);
+                    CellPos += new Vector3Int(0, 0, -1);
                     _isMoving = true;
                     break;
             }

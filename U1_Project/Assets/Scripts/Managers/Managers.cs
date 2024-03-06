@@ -10,6 +10,7 @@ public class Managers : MonoBehaviour
     #region Contents
     GameManager _game = new GameManager();
     NetworkManager _network = new NetworkManager();
+    ObjectManager _object = new ObjectManager();
 
     public static GameManager Game { get { return Instance._game; } }
     #endregion
@@ -32,6 +33,7 @@ public class Managers : MonoBehaviour
     public static PoolManager Pool { get { return Instance._pool; } }
     public static DataManager Data { get { return Instance._data; } }
     public static NetworkManager Network { get { return Instance._network; } }
+    public static ObjectManager Object { get { return Instance._object; } }
 
     void Start()
     {

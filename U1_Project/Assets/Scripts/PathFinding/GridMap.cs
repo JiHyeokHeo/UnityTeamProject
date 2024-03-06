@@ -39,6 +39,23 @@ public class GridMap : MonoBehaviour
         }
     }
 
+    public bool SearchRange(Node node, int range)
+    {
+        for (int x = -range; x <= range; x++)
+        {
+            for (int y = -range; y <= range; y++)
+            {
+                // 자기 자신은 제외
+                if (x == 0 && y == 0)
+                    continue;
+
+
+            }
+        }
+
+        return false;
+    }
+
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();

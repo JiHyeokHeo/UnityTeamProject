@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class PoolManager 
 {
@@ -37,7 +38,7 @@ public class PoolManager
             poolable.transform.parent = Root.transform;
             poolable.gameObject.SetActive(false);
             poolable.IsUsing = false;
-
+            
             _poolQueue.Enqueue(poolable);
         }
 
@@ -60,10 +61,8 @@ public class PoolManager
 
             return poolable;
         }
-
     }
     #endregion
-
     Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
     GameObject _root;
 
@@ -94,9 +93,9 @@ public class PoolManager
             return;
         }
 
-
         _pool[name].Push(poolable);
     }
+
 
     public Poolable Pop(GameObject original, Transform parent = null)
     {
