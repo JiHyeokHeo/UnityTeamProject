@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerController : BaseController
 {
-    [SerializeField]
-    float _speed = 10.0f;
-
     public enum PlayerState
     {
         Die,
@@ -15,7 +12,7 @@ public class PlayerController : BaseController
         Channeling,
     }
 
-    public override void Init()
+    protected override void Init()
     {
         WorldObjectType = Define.WorldObject.Player;
         Managers.Input.KeyAction -= OnKeyboard;
@@ -27,7 +24,6 @@ public class PlayerController : BaseController
         //Managers.UI.ShowPopupUI<UI_Button>();
 
         //Managers.UI.ClosePopupUI(button);
-
     }
 
     protected override void UpdateDie()

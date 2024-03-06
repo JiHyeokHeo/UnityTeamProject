@@ -4,28 +4,11 @@ using UnityEngine;
 
 public class Define
 {
-    public enum MoveDir
-    {
-        None,
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
     public enum WorldObject
     {
         Unknown,
         Player,
         Monster,
-    }
-
-    public enum State
-    {
-        Die,
-        Idle,
-        Moving,
-        Skill,
     }
 
     public enum Scene

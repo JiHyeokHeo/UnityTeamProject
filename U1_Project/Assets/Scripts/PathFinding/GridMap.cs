@@ -98,24 +98,24 @@ public class GridMap : MonoBehaviour
     public List<Node> _path;
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, new Vector3(_gridWorldSize.x, 1, _gridWorldSize.y));
+        //Gizmos.DrawWireCube(transform.position, new Vector3(_gridWorldSize.x, 1, _gridWorldSize.y));
 
-        if( _grid != null)
-        {
-            Node playerNode = NodeFromWorldPoint(player.position);
-            foreach (Node node in _grid)
-            {
-                Gizmos.color = (node._walkable) ? Color.white : Color.red;
-                if (playerNode == node)
-                    Gizmos.color = Color.cyan;
+        //if( _grid != null)
+        //{
+        //    Node playerNode = NodeFromWorldPoint(player.position);
+        //    foreach (Node node in _grid)
+        //    {
+        //        Gizmos.color = (node._walkable) ? Color.white : Color.red;
+        //        if (playerNode == node)
+        //            Gizmos.color = Color.cyan;
 
-                if (_path != null)
-                    if (_path.Contains(node))
-                        Gizmos.color = Color.black;
+        //        if (_path != null)
+        //            if (_path.Contains(node))
+        //                Gizmos.color = Color.black;
 
-                Gizmos.DrawCube(node._worldPosition, Vector3.one * (_nodeDiameter) - new Vector3(0.0f, 9.0f, 0.0f));
-            }
-        }
+        //        Gizmos.DrawCube(node._worldPosition, Vector3.one * (_nodeDiameter) - new Vector3(0.0f, 9.0f, 0.0f));
+        //    }
+        //}
     }
 
 }

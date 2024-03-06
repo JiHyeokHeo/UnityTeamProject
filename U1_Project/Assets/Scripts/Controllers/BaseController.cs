@@ -7,6 +7,9 @@ public abstract class BaseController : MonoBehaviour
 {
     public int Id { get; set; }
 
+    public GridMap _gridMap;
+    public float _speed = 5.0f;
+
     public Vector3Int CellPos 
     {
         get 
@@ -18,6 +21,7 @@ public abstract class BaseController : MonoBehaviour
         {
             PosInfo.PosX = value.x;
             PosInfo.PosY = value.y;
+            PosInfo.PosZ = value.z;
         }
     }
 
@@ -34,13 +38,31 @@ public abstract class BaseController : MonoBehaviour
         }
     }
 
+    protected MoveDir _lastDir = MoveDir.Down;
+    public MoveDir Dir
+    {
+        get { return PosInfo.MoveDir; }
+        set
+        {
+            if (PosInfo.MoveDir == value)
+                return;
+
+            PosInfo.MoveDir = value;
+            if (value != MoveDir.None)
+                _lastDir = value;
+
+            // TODO 
+            // UpdateAnimation();
+        }
+    }
+
     protected GameObject _lockTarget;
 
     public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;
 
-    protected Define.State _state = Define.State.Idle;
+    protected State _state = State.Idle;
 
-    public virtual Define.State State
+    public virtual State State
     {
         get { return _state; }
         set
@@ -50,14 +72,14 @@ public abstract class BaseController : MonoBehaviour
             Animator anim = GetComponent<Animator>();
             switch(_state)
             {
-                case Define.State.Die:
+                case State.Dead:
                     //anim.CrossFade("", 0.1f);
                     break;
-                case Define.State.Idle:
+                case State.Idle:
                     break;
-                case Define.State.Moving:
+                case State.Moving:
                     break;
-                case Define.State.Skill:
+                case State.Skill:
                     break;
             }
         }
@@ -70,23 +92,88 @@ public abstract class BaseController : MonoBehaviour
 
     void Update()
     {
+        UpdateController();
+    }
+
+    protected virtual void UpdateController()
+    {
         switch (_state)
         {
-            case Define.State.Die:
+            case State.Dead:
                 UpdateDie();
                 break;
-            case Define.State.Moving:
+            case State.Moving:
                 UpdateMoving();
                 break;
-            case Define.State.Idle:
+            case State.Idle:
                 UpdateIdle();
                 break;
         }
     }
 
-    protected virtual void UpdateDie() { }
-    protected virtual void UpdateMoving() { }
     protected virtual void UpdateIdle() { }
+    protected virtual void UpdateDie() { }
 
-    public abstract void Init();
+    protected virtual void UpdateMoving()
+    {
+        //if (_isMoving == false)
+        //    return;
+
+        Node node = _gridMap.NodeFromWorldPoint(CellPos);
+        Vector3 destPos = node._worldPosition;
+        Vector3 moveDir = destPos - transform.position;
+
+        // 도착 여부 체크
+        float dist = moveDir.magnitude;
+        if (dist < _speed * Time.deltaTime)
+        {
+            transform.position = destPos;
+            MoveToNextPos();
+        }
+        else
+        {
+            transform.position += moveDir.normalized * _speed * Time.deltaTime;
+        }
+
+    }
+
+    protected virtual void MoveToNextPos()
+    {
+        if (Dir == MoveDir.None)
+        {
+            State = State.Idle;
+            return;
+        }
+
+        Vector3Int prevCellPos = CellPos;
+
+        Vector3Int destPos = CellPos;
+
+        switch (Dir)
+        {
+            case MoveDir.Up:
+                destPos += new Vector3Int(0, 0, 1);
+                break;
+            case MoveDir.Left:
+                destPos += Vector3Int.left;
+                break;
+            case MoveDir.Right:
+                destPos += Vector3Int.right;
+                break;
+            case MoveDir.Down:
+                destPos += new Vector3Int(0, 0, -1);
+                break;
+        }
+
+        if (Managers.Object.Find(destPos) == null)
+        {
+            CellPos = destPos;
+        }
+
+    }
+
+    protected virtual void Init()
+    {
+
+    }
 }

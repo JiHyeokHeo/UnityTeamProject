@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.Protocol;
+﻿using Assets.Scripts.Controllers;
+using Google.Protobuf.Protocol;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ public class ObjectManager
 			go.name = info.Name;
 			_objects.Add(info.PlayerId, go);
 
-            MyTest = go.GetComponent<MonsterController>();
+            MyTest = go.GetComponent<MyMonsterController>();
 			MyTest.Id = info.PlayerId;
 			MyTest.PosInfo = info.PosInfo;
         }
@@ -28,11 +29,10 @@ public class ObjectManager
             go.name = info.Name;
             _objects.Add(info.PlayerId, go);
 
-            PlayerController pc = go.GetComponent<PlayerController>();
+            MonsterController pc = go.GetComponent<MonsterController>();
 			pc.Id = info.PlayerId;
 			pc.PosInfo = info.PosInfo;
         }
-
 	}
 	public void Add(int id, GameObject go)
 	{
@@ -53,6 +53,13 @@ public class ObjectManager
 		MyTest = null;
 	}
 
+	public GameObject FindById(int id)
+	{
+		GameObject go = null;
+		_objects.TryGetValue(id, out go);
+		return go;
+	}
+
 	public GameObject Find(Vector3Int cellPos)
 	{
 		foreach (GameObject obj in _objects.Values)
@@ -61,8 +68,8 @@ public class ObjectManager
 			if (bc == null)
 				continue;
 
-			//if (bc.CellPos == cellPos)
-			//	return obj;
+			if (bc.CellPos == cellPos)
+				return obj;
 		}
 
 		return null;

@@ -13,6 +13,14 @@ enum MsgId {
   S_MOVE = 5;
 }
 
+enum State
+{
+	IDLE = 0;
+	MOVING = 1;
+	SKILL = 2;
+	DEAD = 3;
+}
+
 enum MoveDir {
   NONE = 0;
   UP = 1;
@@ -53,7 +61,8 @@ message PlayerInfo {
 
 message PositionInfo {
   MoveDir moveDir = 1;
-  int32 posX = 2;
-  int32 posY = 3;
-  int32 posZ = 4;
+  State state = 2;
+  int32 posX = 3;
+  int32 posY = 4;
+  int32 posZ = 5;
 }

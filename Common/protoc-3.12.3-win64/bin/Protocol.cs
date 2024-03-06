@@ -33,16 +33,18 @@ namespace Google.Protobuf.Protocol {
             "EhAKCHBsYXllcklkGAEgASgFEicKB3Bvc0luZm8YAiABKAsyFi5Qcm90b2Nv",
             "bC5Qb3NpdGlvbkluZm8iVQoKUGxheWVySW5mbxIQCghwbGF5ZXJJZBgBIAEo",
             "BRIMCgRuYW1lGAIgASgJEicKB3Bvc0luZm8YAyABKAsyFi5Qcm90b2NvbC5Q",
-            "b3NpdGlvbkluZm8iXAoMUG9zaXRpb25JbmZvEiIKB21vdmVEaXIYASABKA4y",
-            "ES5Qcm90b2NvbC5Nb3ZlRGlyEgwKBHBvc1gYAiABKAUSDAoEcG9zWRgDIAEo",
-            "BRIMCgRwb3NaGAQgASgFKl8KBU1zZ0lkEhAKDFNfRU5URVJfR0FNRRAAEhAK",
-            "DFNfTEVBVkVfR0FNRRABEgsKB1NfU1BBV04QAhINCglTX0RFU1BBV04QAxIK",
-            "CgZDX01PVkUQBBIKCgZTX01PVkUQBSo6CgdNb3ZlRGlyEggKBE5PTkUQABIG",
-            "CgJVUBABEggKBERPV04QAhIICgRMRUZUEAMSCQoFUklHSFQQBEIbqgIYR29v",
-            "Z2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "b3NpdGlvbkluZm8ifAoMUG9zaXRpb25JbmZvEiIKB21vdmVEaXIYASABKA4y",
+            "ES5Qcm90b2NvbC5Nb3ZlRGlyEh4KBXN0YXRlGAIgASgOMg8uUHJvdG9jb2wu",
+            "U3RhdGUSDAoEcG9zWBgDIAEoBRIMCgRwb3NZGAQgASgFEgwKBHBvc1oYBSAB",
+            "KAUqXwoFTXNnSWQSEAoMU19FTlRFUl9HQU1FEAASEAoMU19MRUFWRV9HQU1F",
+            "EAESCwoHU19TUEFXThACEg0KCVNfREVTUEFXThADEgoKBkNfTU9WRRAEEgoK",
+            "BlNfTU9WRRAFKjIKBVN0YXRlEggKBElETEUQABIKCgZNT1ZJTkcQARIJCgVT",
+            "S0lMTBACEggKBERFQUQQAyo6CgdNb3ZlRGlyEggKBE5PTkUQABIGCgJVUBAB",
+            "EggKBERPV04QAhIICgRMRUZUEAMSCQoFUklHSFQQBEIbqgIYR29vZ2xlLlBy",
+            "b3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.MoveDir), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.State), typeof(global::Google.Protobuf.Protocol.MoveDir), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterGame), global::Google.Protobuf.Protocol.S_EnterGame.Parser, new[]{ "Player" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_LeaveGame), global::Google.Protobuf.Protocol.S_LeaveGame.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Spawn), global::Google.Protobuf.Protocol.S_Spawn.Parser, new[]{ "Players" }, null, null, null, null),
@@ -50,7 +52,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Move), global::Google.Protobuf.Protocol.C_Move.Parser, new[]{ "PosInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Move), global::Google.Protobuf.Protocol.S_Move.Parser, new[]{ "PlayerId", "PosInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.PlayerInfo), global::Google.Protobuf.Protocol.PlayerInfo.Parser, new[]{ "PlayerId", "Name", "PosInfo" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.PositionInfo), global::Google.Protobuf.Protocol.PositionInfo.Parser, new[]{ "MoveDir", "PosX", "PosY", "PosZ" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.PositionInfo), global::Google.Protobuf.Protocol.PositionInfo.Parser, new[]{ "MoveDir", "State", "PosX", "PosY", "PosZ" }, null, null, null, null)
           }));
     }
     #endregion
@@ -64,6 +66,13 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("S_DESPAWN")] SDespawn = 3,
     [pbr::OriginalName("C_MOVE")] CMove = 4,
     [pbr::OriginalName("S_MOVE")] SMove = 5,
+  }
+
+  public enum State {
+    [pbr::OriginalName("IDLE")] Idle = 0,
+    [pbr::OriginalName("MOVING")] Moving = 1,
+    [pbr::OriginalName("SKILL")] Skill = 2,
+    [pbr::OriginalName("DEAD")] Dead = 3,
   }
 
   public enum MoveDir {
@@ -1071,6 +1080,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public PositionInfo(PositionInfo other) : this() {
       moveDir_ = other.moveDir_;
+      state_ = other.state_;
       posX_ = other.posX_;
       posY_ = other.posY_;
       posZ_ = other.posZ_;
@@ -1093,8 +1103,19 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "state" field.</summary>
+    public const int StateFieldNumber = 2;
+    private global::Google.Protobuf.Protocol.State state_ = global::Google.Protobuf.Protocol.State.Idle;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Google.Protobuf.Protocol.State State {
+      get { return state_; }
+      set {
+        state_ = value;
+      }
+    }
+
     /// <summary>Field number for the "posX" field.</summary>
-    public const int PosXFieldNumber = 2;
+    public const int PosXFieldNumber = 3;
     private int posX_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int PosX {
@@ -1105,7 +1126,7 @@ namespace Google.Protobuf.Protocol {
     }
 
     /// <summary>Field number for the "posY" field.</summary>
-    public const int PosYFieldNumber = 3;
+    public const int PosYFieldNumber = 4;
     private int posY_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int PosY {
@@ -1116,7 +1137,7 @@ namespace Google.Protobuf.Protocol {
     }
 
     /// <summary>Field number for the "posZ" field.</summary>
-    public const int PosZFieldNumber = 4;
+    public const int PosZFieldNumber = 5;
     private int posZ_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int PosZ {
@@ -1140,6 +1161,7 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (MoveDir != other.MoveDir) return false;
+      if (State != other.State) return false;
       if (PosX != other.PosX) return false;
       if (PosY != other.PosY) return false;
       if (PosZ != other.PosZ) return false;
@@ -1150,6 +1172,7 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (MoveDir != global::Google.Protobuf.Protocol.MoveDir.None) hash ^= MoveDir.GetHashCode();
+      if (State != global::Google.Protobuf.Protocol.State.Idle) hash ^= State.GetHashCode();
       if (PosX != 0) hash ^= PosX.GetHashCode();
       if (PosY != 0) hash ^= PosY.GetHashCode();
       if (PosZ != 0) hash ^= PosZ.GetHashCode();
@@ -1170,16 +1193,20 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteEnum((int) MoveDir);
       }
-      if (PosX != 0) {
+      if (State != global::Google.Protobuf.Protocol.State.Idle) {
         output.WriteRawTag(16);
+        output.WriteEnum((int) State);
+      }
+      if (PosX != 0) {
+        output.WriteRawTag(24);
         output.WriteInt32(PosX);
       }
       if (PosY != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(PosY);
       }
       if (PosZ != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteInt32(PosZ);
       }
       if (_unknownFields != null) {
@@ -1192,6 +1219,9 @@ namespace Google.Protobuf.Protocol {
       int size = 0;
       if (MoveDir != global::Google.Protobuf.Protocol.MoveDir.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MoveDir);
+      }
+      if (State != global::Google.Protobuf.Protocol.State.Idle) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
       if (PosX != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PosX);
@@ -1215,6 +1245,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.MoveDir != global::Google.Protobuf.Protocol.MoveDir.None) {
         MoveDir = other.MoveDir;
+      }
+      if (other.State != global::Google.Protobuf.Protocol.State.Idle) {
+        State = other.State;
       }
       if (other.PosX != 0) {
         PosX = other.PosX;
@@ -1241,14 +1274,18 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 16: {
-            PosX = input.ReadInt32();
+            State = (global::Google.Protobuf.Protocol.State) input.ReadEnum();
             break;
           }
           case 24: {
-            PosY = input.ReadInt32();
+            PosX = input.ReadInt32();
             break;
           }
           case 32: {
+            PosY = input.ReadInt32();
+            break;
+          }
+          case 40: {
             PosZ = input.ReadInt32();
             break;
           }

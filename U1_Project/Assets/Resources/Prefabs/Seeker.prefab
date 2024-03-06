@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1721332290154973378}
   - component: {fileID: 4225995666801338995}
   - component: {fileID: 2509585288041616581}
+  - component: {fileID: -2063088057730893035}
   m_Layer: 7
   m_Name: Seeker
   m_TagString: Untagged
@@ -111,3 +112,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ac361bf750e9f45a469f0260cc246b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2063088057730893035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9108158809160732500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d163602a84e09e8428ae5967f4ffc65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridMap: {fileID: 0}
+  _speed: 5
