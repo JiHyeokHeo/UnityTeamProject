@@ -20,7 +20,7 @@ public class ObjectManager
 
             MyTest = go.GetComponent<MonsterController>();
 			MyTest.Id = info.PlayerId;
-			MyTest.CellPos = new Vector3Int(info.PosX, info.PosY, info.PosZ);
+			MyTest.PosInfo = info.PosInfo;
         }
 		else
 		{
@@ -30,7 +30,7 @@ public class ObjectManager
 
             PlayerController pc = go.GetComponent<PlayerController>();
 			pc.Id = info.PlayerId;
-			pc.CellPos = new Vector3Int(info.PosX, info.PosY, info.PosZ);
+			pc.PosInfo = info.PosInfo;
         }
 
 	}

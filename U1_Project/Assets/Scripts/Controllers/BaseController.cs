@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,32 @@ public abstract class BaseController : MonoBehaviour
 {
     public int Id { get; set; }
 
-    public Vector3Int CellPos { get; set; } = Vector3Int.zero;
+    public Vector3Int CellPos 
+    {
+        get 
+        {
+            return new Vector3Int(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
+        } 
+
+        set
+        {
+            PosInfo.PosX = value.x;
+            PosInfo.PosY = value.y;
+        }
+    }
+
+    PositionInfo _positionInfo = new PositionInfo();
+    public PositionInfo PosInfo
+    {
+        get { return _positionInfo; }
+        set
+        {
+            if (_positionInfo.Equals(value))
+                return;
+
+            _positionInfo = value;
+        }
+    }
 
     protected GameObject _lockTarget;
 
