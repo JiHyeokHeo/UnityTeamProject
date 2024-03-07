@@ -37,10 +37,12 @@ namespace Server
 			MyPlayer = PlayerManager.Instnace.Add();
 			{
 				MyPlayer.Info.Name = $"Player_{MyPlayer.Info.PlayerId}";
-				MyPlayer.Info.PosInfo.MoveDir= MoveDir.None;
+				MyPlayer.Info.PosInfo.State = State.Idle;
+                MyPlayer.Info.PosInfo.MoveDir= MoveDir.None;
 				MyPlayer.Info.PosInfo.PosX = 0;
 				MyPlayer.Info.PosInfo.PosY = 0;
 				MyPlayer.Info.PosInfo.PosZ = 0;
+
 				MyPlayer.Session = this;
 			}
 

@@ -71,17 +71,50 @@ namespace Assets.Scripts.Controllers
 
         protected override void MoveToNextPos()
         {
-            State prevState = State;
-            Vector3Int prevCellPos = CellPos;
+            if (Dir == MoveDir.None)
+            {
+                State = State.Idle;
+                CheckUpdatedFlag();
+                return;
+            }
 
-            base.MoveToNextPos();
+            Vector3Int destPos = CellPos;
 
-            if (prevState != State || CellPos != prevCellPos)
+            switch (Dir)
+            {
+                case MoveDir.Up:
+                    destPos += new Vector3Int(0, 0, 1);
+                    break;
+                case MoveDir.Left:
+                    destPos += Vector3Int.left;
+                    break;
+                case MoveDir.Right:
+                    destPos += Vector3Int.right;
+                    break;
+                case MoveDir.Down:
+                    destPos += new Vector3Int(0, 0, -1);
+                    break;
+            }
+
+            if (Managers.Object.Find(destPos) == null)
+            {
+                CellPos = destPos;
+            }
+
+            CheckUpdatedFlag();
+
+        }
+
+        void CheckUpdatedFlag()
+        {
+            if (_updated)
             {
                 C_Move movePacket = new C_Move();
                 movePacket.PosInfo = PosInfo;
                 Managers.Network.Send(movePacket);
+                _updated = false;
             }
         }
+
     }
 }

@@ -8,6 +8,7 @@ public class MonsterController : BaseController
 {
     protected override void Init()
     {
+        base.Init();
         GameObject obj = GameObject.Find("Astar");
         //GameObject obj2 = GameObject.Find("Seeker");
         _gridMap = obj.GetComponent<GridMap>();

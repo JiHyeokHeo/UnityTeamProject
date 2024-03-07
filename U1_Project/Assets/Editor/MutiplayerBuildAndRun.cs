@@ -10,17 +10,6 @@ using UnityEngine.UI;
 
 public class MutiplayerBuildAndRun
 {
-    struct SceneSetting
-    {
-        public Dictionary<SceneType, bool> settings;
-    }
-
-    public enum SceneType
-    {
-        Login,
-        Play,
-    }
-
     [MenuItem("Tools/Run Multiplayer/2 Players")]
     static void PerformWin64Build2()
     {
@@ -69,6 +58,4 @@ public class MutiplayerBuildAndRun
 
         return scenes;
     }
-
-
 }

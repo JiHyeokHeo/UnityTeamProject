@@ -6,24 +6,11 @@ using UnityEngine;
 public abstract class BaseController : MonoBehaviour
 {
     public int Id { get; set; }
-
+    
     public GridMap _gridMap;
     public float _speed = 5.0f;
 
-    public Vector3Int CellPos 
-    {
-        get 
-        {
-            return new Vector3Int(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
-        } 
-
-        set
-        {
-            PosInfo.PosX = value.x;
-            PosInfo.PosY = value.y;
-            PosInfo.PosZ = value.z;
-        }
-    }
+    protected bool _updated = false;
 
     PositionInfo _positionInfo = new PositionInfo();
     public PositionInfo PosInfo
@@ -34,9 +21,31 @@ public abstract class BaseController : MonoBehaviour
             if (_positionInfo.Equals(value))
                 return;
 
-            _positionInfo = value;
+            CellPos = new Vector3Int(value.PosX, value.PosY, value.PosZ);
+            State = value.State;
+            Dir = value.MoveDir;
         }
     }
+
+    public Vector3Int CellPos
+    {
+        get
+        {
+            return new Vector3Int(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
+        }
+
+        set
+        {
+            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y && PosInfo.PosZ == value.z)
+                return;
+
+            PosInfo.PosX = value.x;
+            PosInfo.PosY = value.y;
+            PosInfo.PosZ = value.z;
+            _updated = true;
+        }
+    }
+
 
     protected MoveDir _lastDir = MoveDir.Down;
     public MoveDir Dir
@@ -53,6 +62,7 @@ public abstract class BaseController : MonoBehaviour
 
             // TODO 
             // UpdateAnimation();
+            _updated = true;
         }
     }
 
@@ -60,8 +70,8 @@ public abstract class BaseController : MonoBehaviour
 
     public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;
 
+    protected Animator _animator;
     protected State _state = State.Idle;
-
     public virtual State State
     {
         get { return _state; }
@@ -70,29 +80,52 @@ public abstract class BaseController : MonoBehaviour
             _state = value;
 
             Animator anim = GetComponent<Animator>();
-            switch(_state)
-            {
-                case State.Dead:
-                    //anim.CrossFade("", 0.1f);
-                    break;
-                case State.Idle:
-                    break;
-                case State.Moving:
-                    break;
-                case State.Skill:
-                    break;
-            }
+            UpdateAnimation();
         }
     }
 
     void Start()
     {
-        
+        Init();
     }
 
     void Update()
     {
         UpdateController();
+    }
+
+    protected virtual void Init()
+    {
+        _animator = GetComponent<Animator>();
+        PosInfo.State = State.Idle;
+        Dir = MoveDir.None;
+        CellPos = new Vector3Int(0, 0, 0);
+    }
+
+    protected virtual void UpdateAnimation()
+    {
+        if (State == State.Idle)
+        {
+            switch (_lastDir)
+            {
+                case MoveDir.Up:
+                    //_animator.Play();
+                    //_animator.CrossFade("", 0.1f);
+                    break;
+                case MoveDir.Down:
+                    break;
+                case MoveDir.Left:
+                    break;
+                case MoveDir.Right:
+                    break;
+
+            }
+        }
+        else if(State == State.Moving)
+        {
+            // TODO
+            // 움직이는거 추가
+        }
     }
 
     protected virtual void UpdateController()
@@ -139,41 +172,9 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void MoveToNextPos()
     {
-        if (Dir == MoveDir.None)
-        {
-            State = State.Idle;
-            return;
-        }
-
-        Vector3Int prevCellPos = CellPos;
-
-        Vector3Int destPos = CellPos;
-
-        switch (Dir)
-        {
-            case MoveDir.Up:
-                destPos += new Vector3Int(0, 0, 1);
-                break;
-            case MoveDir.Left:
-                destPos += Vector3Int.left;
-                break;
-            case MoveDir.Right:
-                destPos += Vector3Int.right;
-                break;
-            case MoveDir.Down:
-                destPos += new Vector3Int(0, 0, -1);
-                break;
-        }
-
-        if (Managers.Object.Find(destPos) == null)
-        {
-            CellPos = destPos;
-        }
+            
 
     }
 
-    protected virtual void Init()
-    {
 
-    }
 }
