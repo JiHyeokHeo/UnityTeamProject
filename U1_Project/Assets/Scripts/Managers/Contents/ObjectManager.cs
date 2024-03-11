@@ -22,6 +22,7 @@ public class ObjectManager
             MyTest = go.GetComponent<MyMonsterController>();
 			MyTest.Id = info.PlayerId;
 			MyTest.PosInfo = info.PosInfo;
+			MyTest.SyncPos();
         }
 		else
 		{
@@ -32,6 +33,7 @@ public class ObjectManager
             MonsterController pc = go.GetComponent<MonsterController>();
 			pc.Id = info.PlayerId;
 			pc.PosInfo = info.PosInfo;
+            pc.SyncPos();
         }
 	}
 

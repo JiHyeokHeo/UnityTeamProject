@@ -27,6 +27,13 @@ public abstract class BaseController : MonoBehaviour
         }
     }
 
+    public void SyncPos()
+    {
+        Node node = _gridMap.NodeFromWorldPoint(CellPos);
+        Vector3 destPos = node._worldPosition;
+        transform.position = destPos;
+    }
+
     public Vector3Int CellPos
     {
         get
@@ -99,7 +106,9 @@ public abstract class BaseController : MonoBehaviour
         _animator = GetComponent<Animator>();
         PosInfo.State = State.Idle;
         Dir = MoveDir.None;
-        CellPos = new Vector3Int(0, 0, 0);
+
+        // 애니메이션 업데이트 추가 예정
+        // UpdateAnimation();
     }
 
     protected virtual void UpdateAnimation()
@@ -146,6 +155,8 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void UpdateIdle() { }
     protected virtual void UpdateDie() { }
+
+    public virtual void UseSkill(int skillId) { }
 
     protected virtual void UpdateMoving()
     {

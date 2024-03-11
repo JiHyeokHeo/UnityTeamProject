@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.Protocol;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,24 @@ namespace Assets.Scripts.Controllers
                 State = State.Moving;
                 return;
             }
+
+            if (_coSkillColltime == null && Input.GetKey(KeyCode.Space))
+            {
+                Debug.Log("Skill! Space 클릭");
+
+                C_Skill skill = new C_Skill() { Info = new SkillInfo() };
+                skill.Info.SkillId = 1;
+                Managers.Network.Send(skill);
+
+                _coSkillColltime = StartCoroutine("ColInputCooltime", 0.2f);
+            }
+        }
+
+        Coroutine _coSkillColltime;
+        IEnumerator ColInputCooltime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            _coSkillColltime = null;
         }
 
         void GetDirOrder()
@@ -105,7 +124,7 @@ namespace Assets.Scripts.Controllers
 
         }
 
-        void CheckUpdatedFlag()
+        protected override void CheckUpdatedFlag()
         {
             if (_updated)
             {

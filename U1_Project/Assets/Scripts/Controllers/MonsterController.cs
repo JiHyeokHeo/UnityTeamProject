@@ -6,6 +6,8 @@ using static Define;
 
 public class MonsterController : BaseController
 {
+    protected Coroutine _coSkill;
+
     protected override void Init()
     {
         base.Init();
@@ -26,6 +28,30 @@ public class MonsterController : BaseController
     protected override void UpdateController()
     {
         base.UpdateController();
+    }
+
+    public override void UseSkill(int skillId)
+    {
+        if (skillId == 1)
+        {
+            _coSkill = StartCoroutine("CoStartPunch");
+        }
+    }
+
+    protected virtual void CheckUpdatedFlag()
+    {
+
+    }
+
+    IEnumerator CoStartPunch()
+    {
+        Debug.Log("Monster Controller ÆÝÄ¡ ½ÃÀÛ");
+        State = State.Skill;
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Monster Controller ÆÝÄ¡ Á¾·á");
+        State = State.Idle;
+        _coSkill = null;
+        CheckUpdatedFlag();
     }
 
     protected override void UpdateIdle()
