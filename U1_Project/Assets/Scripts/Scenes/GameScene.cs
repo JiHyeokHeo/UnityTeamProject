@@ -17,7 +17,7 @@ public class GameScene : BaseScene
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
 
         Screen.SetResolution(640, 480, false);
-
+        Managers.Map.Load();
         //Managers.Resource.Instantiate("Seeker");
         //Managers.Resource.Instantiate("Target");
         //Managers.Resource.Instantiate("Map/Astar");

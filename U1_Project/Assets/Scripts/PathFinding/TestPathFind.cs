@@ -23,7 +23,6 @@ public class TestPathFind : MonoBehaviour
 
     private void Awake()
     {
-        
         grid = GetComponent<GridMap>();
     }
 
@@ -34,8 +33,8 @@ public class TestPathFind : MonoBehaviour
 
     void FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        Node startNode = grid.NodeFromWorldPoint(startPos);
-        Node targetNode = grid.NodeFromWorldPoint(targetPos);
+        Node startNode = Managers.Map.NodeFromWorldPoint(startPos);
+        Node targetNode = Managers.Map.NodeFromWorldPoint(targetPos);
 
         List<Node> openSet = new List<Node>();
         
@@ -64,7 +63,7 @@ public class TestPathFind : MonoBehaviour
                 return;
             }
 
-            List<Node> nodeNeigbours = grid.GetNeighbours(currentNode);
+            List<Node> nodeNeigbours = Managers.Map.GetNeighbours(currentNode);
             foreach (Node neighbour in nodeNeigbours)
             {
                 if(!neighbour._walkable || closedSet.Contains(neighbour))

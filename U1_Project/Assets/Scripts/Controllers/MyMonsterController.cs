@@ -11,6 +11,8 @@ namespace Assets.Scripts.Controllers
 {
     class MyMonsterController : MonsterController
     {
+        bool _moveKeyPressed = false;
+
         protected override void Init()
         {
             base.Init();
@@ -38,7 +40,7 @@ namespace Assets.Scripts.Controllers
         protected override void UpdateIdle()
         {
             // 이동 상태로 갈지 확인
-            if (Dir != MoveDir.None)
+            if (_moveKeyPressed)
             {
                 State = State.Moving;
                 return;
@@ -65,6 +67,8 @@ namespace Assets.Scripts.Controllers
 
         void GetDirOrder()
         {
+            _moveKeyPressed = true;
+
             // 싸울 타겟을 지정해야함
             if (Input.GetKey(KeyCode.W))
             {
@@ -84,13 +88,13 @@ namespace Assets.Scripts.Controllers
             }
             else
             {
-                Dir = MoveDir.None;
+                _moveKeyPressed = false;
             }
         }
 
         protected override void MoveToNextPos()
         {
-            if (Dir == MoveDir.None)
+            if (_moveKeyPressed == false)
             {
                 State = State.Idle;
                 CheckUpdatedFlag();
@@ -102,16 +106,16 @@ namespace Assets.Scripts.Controllers
             switch (Dir)
             {
                 case MoveDir.Up:
-                    destPos += new Vector3Int(0, 0, 1);
+                    destPos += new Vector3Int(0, 0, 1) * (int)Managers.Map._nodeRadius * 2;
                     break;
                 case MoveDir.Left:
-                    destPos += Vector3Int.left;
+                    destPos += Vector3Int.left * (int)Managers.Map._nodeRadius * 2;
                     break;
                 case MoveDir.Right:
-                    destPos += Vector3Int.right;
+                    destPos += Vector3Int.right * (int)Managers.Map._nodeRadius * 2;
                     break;
                 case MoveDir.Down:
-                    destPos += new Vector3Int(0, 0, -1);
+                    destPos += new Vector3Int(0, 0, -1) * (int)Managers.Map._nodeRadius * 2;
                     break;
             }
 
@@ -131,6 +135,7 @@ namespace Assets.Scripts.Controllers
                 C_Move movePacket = new C_Move();
                 movePacket.PosInfo = PosInfo;
                 Managers.Network.Send(movePacket);
+                Debug.Log("Test");
                 _updated = false;
             }
         }

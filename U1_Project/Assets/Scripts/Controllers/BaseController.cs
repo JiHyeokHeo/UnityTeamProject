@@ -7,8 +7,7 @@ public abstract class BaseController : MonoBehaviour
 {
     public int Id { get; set; }
     
-    public GridMap _gridMap;
-    public float _speed = 5.0f;
+    public float _speed = 50.0f;
 
     protected bool _updated = false;
 
@@ -29,7 +28,7 @@ public abstract class BaseController : MonoBehaviour
 
     public void SyncPos()
     {
-        Node node = _gridMap.NodeFromWorldPoint(CellPos);
+        Node node = Managers.Map.NodeFromWorldPoint(CellPos);
         Vector3 destPos = node._worldPosition;
         transform.position = destPos;
     }
@@ -163,7 +162,7 @@ public abstract class BaseController : MonoBehaviour
         //if (_isMoving == false)
         //    return;
 
-        Node node = _gridMap.NodeFromWorldPoint(CellPos);
+        Node node = Managers.Map.NodeFromWorldPoint(CellPos);
         Vector3 destPos = node._worldPosition;
         Vector3 moveDir = destPos - transform.position;
 
@@ -177,6 +176,7 @@ public abstract class BaseController : MonoBehaviour
         else
         {
             transform.position += moveDir.normalized * _speed * Time.deltaTime;
+            State = State.Moving;
         }
 
     }

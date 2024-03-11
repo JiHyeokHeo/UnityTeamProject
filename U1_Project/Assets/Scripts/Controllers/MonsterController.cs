@@ -13,7 +13,6 @@ public class MonsterController : BaseController
         base.Init();
         GameObject obj = GameObject.Find("Astar");
         //GameObject obj2 = GameObject.Find("Seeker");
-        _gridMap = obj.GetComponent<GridMap>();
         //_gridMap.player = obj2.transform;
         WorldObjectType = Define.WorldObject.Monster;
     }
@@ -21,7 +20,7 @@ public class MonsterController : BaseController
     void Start()
     {
         Init();
-        Node node = _gridMap.NodeFromWorldPoint(CellPos);
+        Node node = Managers.Map.NodeFromWorldPoint(CellPos);
         transform.position = node._worldPosition;
     }
 

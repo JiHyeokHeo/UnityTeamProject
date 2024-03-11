@@ -70,6 +70,12 @@ message PlayerInfo {
   PositionInfo posInfo = 3;
 }
 
+message MonsterInfo {
+  int32 monsterId = 1;
+  string name = 2;
+  PositionInfo posInfo = 3;
+}
+
 message PositionInfo {
   MoveDir moveDir = 1;
   State state = 2;
