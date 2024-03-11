@@ -15,7 +15,7 @@ enum MsgId {
   S_SKILL = 7;
 }
 
-enum State
+enum CreatureState
 {
 	IDLE = 0;
 	MOVING = 1;
@@ -24,11 +24,10 @@ enum State
 }
 
 enum MoveDir {
-  NONE = 0;
-  UP = 1;
-  DOWN = 2;
-  LEFT = 3;
-  RIGHT =4;
+  UP = 0;
+  DOWN = 1;
+  LEFT = 2;
+  RIGHT = 3;
 }
 
 message S_EnterGame {
@@ -78,7 +77,7 @@ message MonsterInfo {
 
 message PositionInfo {
   MoveDir moveDir = 1;
-  State state = 2;
+  CreatureState state = 2;
   int32 posX = 3;
   int32 posY = 4;
   int32 posZ = 5;

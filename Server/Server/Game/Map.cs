@@ -86,7 +86,7 @@ namespace Server.Game
         public Node[,] _grid; // 2차원 배열
         public List<Node> _path;
         // 지름
-        float _nodeDiameter;
+        public float _nodeDiameter;
         public int _gridSizeX, _gridSizeY;
 
         public bool[,] _collision;
@@ -99,6 +99,7 @@ namespace Server.Game
             if (cellPos.z < 0 || cellPos.z >= _gridSizeY)
                 return false;
 
+           
             return !_collision[cellPos.x, cellPos.y];
         }
 
@@ -150,6 +151,13 @@ namespace Server.Game
             _gridSizeY = int.Parse(reader.ReadLine());
             _collision = new bool[_gridSizeX, _gridSizeY];
             _players = new Player[_gridSizeX, _gridSizeY];
+
+            // 임시 땜방
+            _gridWorldSizeX = 100.0f;
+            _gridWorldSizeY = 90.0f;
+            _nodeRadius = 5.0f;
+            _nodeDiameter = 10.0f;
+            // 
 
             for (int y = 0; y < _gridSizeY; y++)
             {

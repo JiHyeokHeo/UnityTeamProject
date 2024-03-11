@@ -28,8 +28,7 @@ public abstract class BaseController : MonoBehaviour
 
     public void SyncPos()
     {
-        Node node = Managers.Map.NodeFromWorldPoint(CellPos);
-        Vector3 destPos = node._worldPosition;
+        Vector3 destPos = Managers.Map.CellPosToWorldPoint(CellPos);
         transform.position = destPos;
     }
 
@@ -53,7 +52,6 @@ public abstract class BaseController : MonoBehaviour
     }
 
 
-    protected MoveDir _lastDir = MoveDir.Down;
     public MoveDir Dir
     {
         get { return PosInfo.MoveDir; }
@@ -63,8 +61,6 @@ public abstract class BaseController : MonoBehaviour
                 return;
 
             PosInfo.MoveDir = value;
-            if (value != MoveDir.None)
-                _lastDir = value;
 
             // TODO 
             // UpdateAnimation();
@@ -77,16 +73,18 @@ public abstract class BaseController : MonoBehaviour
     public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;
 
     protected Animator _animator;
-    protected State _state = State.Idle;
-    public virtual State State
+    public virtual CreatureState State
     {
-        get { return _state; }
+        get { return PosInfo.State; }
         set
         {
-            _state = value;
+            if (PosInfo.State == value)
+                return;
 
+            PosInfo.State = value;
             Animator anim = GetComponent<Animator>();
             UpdateAnimation();
+            _updated = true;
         }
     }
 
@@ -103,18 +101,17 @@ public abstract class BaseController : MonoBehaviour
     protected virtual void Init()
     {
         _animator = GetComponent<Animator>();
-        PosInfo.State = State.Idle;
-        Dir = MoveDir.None;
-
+        PosInfo.State = CreatureState.Idle;
+        Dir = MoveDir.Down;
         // 애니메이션 업데이트 추가 예정
         // UpdateAnimation();
     }
 
     protected virtual void UpdateAnimation()
     {
-        if (State == State.Idle)
+        if (State == CreatureState.Idle)
         {
-            switch (_lastDir)
+            switch (Dir)
             {
                 case MoveDir.Up:
                     //_animator.Play();
@@ -129,7 +126,7 @@ public abstract class BaseController : MonoBehaviour
 
             }
         }
-        else if(State == State.Moving)
+        else if(State == CreatureState.Moving)
         {
             // TODO
             // 움직이는거 추가
@@ -138,15 +135,15 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void UpdateController()
     {
-        switch (_state)
+        switch (State)
         {
-            case State.Dead:
+            case CreatureState.Dead:
                 UpdateDie();
                 break;
-            case State.Moving:
+            case CreatureState.Moving:
                 UpdateMoving();
                 break;
-            case State.Idle:
+            case CreatureState.Idle:
                 UpdateIdle();
                 break;
         }
@@ -162,8 +159,7 @@ public abstract class BaseController : MonoBehaviour
         //if (_isMoving == false)
         //    return;
 
-        Node node = Managers.Map.NodeFromWorldPoint(CellPos);
-        Vector3 destPos = node._worldPosition;
+        Vector3 destPos = Managers.Map.CellPosToWorldPoint(CellPos) + new Vector3(0.5f, 0.0f, 0.5f);
         Vector3 moveDir = destPos - transform.position;
 
         // 도착 여부 체크
@@ -176,10 +172,23 @@ public abstract class BaseController : MonoBehaviour
         else
         {
             transform.position += moveDir.normalized * _speed * Time.deltaTime;
-            State = State.Moving;
+            State = CreatureState.Moving;
         }
 
     }
+
+    public MoveDir GetDirFromVec(Vector3Int dir)
+    {
+        if (dir.x > 0)
+            return MoveDir.Right;
+        else if (dir.x < 0)
+            return MoveDir.Left;
+        else if (dir.z > 0)
+            return MoveDir.Up;
+        else
+            return MoveDir.Down;
+    }
+
 
     protected virtual void MoveToNextPos()
     {

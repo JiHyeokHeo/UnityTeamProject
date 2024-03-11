@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,8 +36,9 @@ public class MapManager
     public Node[,] _grid; // 2차원 배열
 
     // 지름
-    float _nodeDiameter;
+    public float _nodeDiameter;
     public int _gridSizeX, _gridSizeY;
+    Vector3 worldBottomLeft;
 
     public void Load()
     {
@@ -51,7 +53,7 @@ public class MapManager
     void CreateGrid()
     {
         _grid = new Node[_gridSizeX, _gridSizeY];
-        Vector3 worldBottomLeft = Vector3.zero - Vector3.right * _gridWorldSizeX / 2 - Vector3.forward * _gridWorldSizeY / 2;
+        worldBottomLeft = Vector3.zero - Vector3.right * _gridWorldSizeX / 2 - Vector3.forward * _gridWorldSizeY / 2;
 
         for (int x = 0; x < _gridSizeX; x++)
         {
@@ -119,6 +121,25 @@ public class MapManager
         int y = Mathf.RoundToInt((_gridSizeY - 1) * percentY);
 
         return _grid[x, y];
+    }
+
+    public Vector3 CellPosToWorldPoint(Vector3Int cellPos)
+    {
+        Vector3 ret;
+        int x = (int)worldBottomLeft.x + (int)_nodeRadius +  Mathf.RoundToInt(_nodeDiameter) * cellPos.x;
+        int y = cellPos.y;
+        int z = (int)worldBottomLeft.z + (int)_nodeRadius +  Mathf.RoundToInt(_nodeDiameter) * cellPos.z;
+
+        ret.x = x;
+        ret.y = y;
+        ret.z = z;
+
+        return ret;
+    }
+
+    private Vector2 Vector2(int v1, int v2)
+    {
+        throw new NotImplementedException();
     }
 
     public List<Node> _path;

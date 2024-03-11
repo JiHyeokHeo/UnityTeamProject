@@ -22,14 +22,14 @@ namespace Assets.Scripts.Controllers
 
         protected override void UpdateController()
         {
-            switch (_state)
+            switch (State)
             {
-                case State.Dead:
+                case CreatureState.Dead:
                     break;
-                case State.Moving:
+                case CreatureState.Moving:
                     GetDirOrder();
                     break;
-                case State.Idle:
+                case CreatureState.Idle:
                     GetDirOrder();
                     break;
             }
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Controllers
             // 이동 상태로 갈지 확인
             if (_moveKeyPressed)
             {
-                State = State.Moving;
+                State = CreatureState.Moving;
                 return;
             }
 
@@ -64,6 +64,7 @@ namespace Assets.Scripts.Controllers
             yield return new WaitForSeconds(time);
             _coSkillColltime = null;
         }
+
 
         void GetDirOrder()
         {
@@ -96,7 +97,7 @@ namespace Assets.Scripts.Controllers
         {
             if (_moveKeyPressed == false)
             {
-                State = State.Idle;
+                State = CreatureState.Idle;
                 CheckUpdatedFlag();
                 return;
             }
@@ -106,16 +107,16 @@ namespace Assets.Scripts.Controllers
             switch (Dir)
             {
                 case MoveDir.Up:
-                    destPos += new Vector3Int(0, 0, 1) * (int)Managers.Map._nodeRadius * 2;
+                    destPos += new Vector3Int(0, 0, 1);
                     break;
                 case MoveDir.Left:
-                    destPos += Vector3Int.left * (int)Managers.Map._nodeRadius * 2;
+                    destPos += Vector3Int.left;
                     break;
                 case MoveDir.Right:
-                    destPos += Vector3Int.right * (int)Managers.Map._nodeRadius * 2;
+                    destPos += Vector3Int.right;
                     break;
                 case MoveDir.Down:
-                    destPos += new Vector3Int(0, 0, -1) * (int)Managers.Map._nodeRadius * 2;
+                    destPos += new Vector3Int(0, 0, -1);
                     break;
             }
 
