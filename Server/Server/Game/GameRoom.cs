@@ -125,7 +125,7 @@ namespace Server.Game
             lock (_lock)
             {
                 PlayerInfo info = player.Info;
-                if (info.PosInfo.State != CreatureState.Skill)
+                if (info.PosInfo.State != CreatureState.Idle)
                     return;
 
                 // TODO : 스킬 사용 가능 여부 체크
