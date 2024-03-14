@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.Protocol;
+using Server.Game.Object;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Server.Game
+namespace Server.Game.Room
 {
     public class Node
     {
@@ -41,39 +42,39 @@ namespace Server.Game
         public Vector3Int(int x, int y, int z) { this.x = x; this.y = y; this.z = z; }
 
         public static Vector3Int zero { get { return new Vector3Int(0, 0, 0); } }
-        public static Vector3Int up { get {return new Vector3Int(0, 0, 1); } }
-        public static Vector3Int down { get {return new Vector3Int(0, 0, -1); } }
-        public static Vector3Int left{ get {return new Vector3Int(-1, 0, 0); } }
-        public static Vector3Int right { get {return new Vector3Int(1, 0, 0); } }
+        public static Vector3Int up { get { return new Vector3Int(0, 0, 1); } }
+        public static Vector3Int down { get { return new Vector3Int(0, 0, -1); } }
+        public static Vector3Int left { get { return new Vector3Int(-1, 0, 0); } }
+        public static Vector3Int right { get { return new Vector3Int(1, 0, 0); } }
 
-        public static Vector3Int operator+(Vector3Int a, Vector3Int b)
+        public static Vector3Int operator +(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(a.x + b.x, a.y + b.y , a.z + b.z);
+            return new Vector3Int(a.x + b.x, a.y + b.y, a.z + b.z);
         }
 
-        public static Vector3Int operator-(Vector3Int a, Vector3Int b)
+        public static Vector3Int operator -(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(a.x - b.x, a.y - b.y, a.z - b.z);
         }
 
-        public static Vector3Int operator*(Vector3Int a, float b)
+        public static Vector3Int operator *(Vector3Int a, float b)
         {
-            return new Vector3Int((int)(a.x * b),(int)(a.y * b), (int)(a.z * b));
+            return new Vector3Int((int)(a.x * b), (int)(a.y * b), (int)(a.z * b));
         }
 
-        public static Vector3Int operator*(Vector3Int a, int b)
+        public static Vector3Int operator *(Vector3Int a, int b)
         {
-            return new Vector3Int((a.x * b), (a.y * b), (a.z * b));
+            return new Vector3Int(a.x * b, a.y * b, a.z * b);
         }
 
-        public static Vector3Int operator/(Vector3Int a, float b)
+        public static Vector3Int operator /(Vector3Int a, float b)
         {
             return new Vector3Int((int)(a.x / b), (int)(a.y / b), (int)(a.z / b));
         }
 
-        public static Vector3Int operator/(Vector3Int a, int b)
+        public static Vector3Int operator /(Vector3Int a, int b)
         {
-            return new Vector3Int((a.x / b), (a.y / b), (a.z / b));
+            return new Vector3Int(a.x / b, a.y / b, a.z / b);
         }
     }
 
@@ -99,7 +100,7 @@ namespace Server.Game
             if (cellPos.z < 0 || cellPos.z >= _gridSizeY)
                 return false;
 
-           
+
             return !_collision[cellPos.x, cellPos.y];
         }
 
@@ -122,7 +123,7 @@ namespace Server.Game
                 return false;
             if (CanGo(dest) == false)
                 return false;
-            
+
             {
                 if (_players[posInfo.PosX, posInfo.PosY] == player)
                     _players[posInfo.PosX, posInfo.PosY] = null;
@@ -162,9 +163,9 @@ namespace Server.Game
             for (int y = 0; y < _gridSizeY; y++)
             {
                 string line = reader.ReadLine();
-                for (int x = 0; x< _gridSizeX; x++)
+                for (int x = 0; x < _gridSizeX; x++)
                 {
-                    _collision[x, y] = (line[x] == '1' ? true : false);
+                    _collision[x, y] = line[x] == '1' ? true : false;
                 }
             }
         }

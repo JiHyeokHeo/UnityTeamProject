@@ -1,28 +1,47 @@
 ﻿using Google.Protobuf.Protocol;
+using Server.Game.Room;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Server.Game
 {
-    public class Player 
+    public class GameObject
     {
-        public PlayerInfo Info { get; set; } = new PlayerInfo() { PosInfo = new PositionInfo() };
+        public GameObjectType ObjectType { get; protected set; } = GameObjectType.None;
+        public int Id
+        {
+            get { return Info.ObjectId; }
+            set { Info.ObjectId = value; }
+        }
+
         public GameRoom Room { get; set; }
-        public ClientSession Session { get; set; }
+
+        public ObjectInfo Info { get; set; } = new ObjectInfo();
+        public PositionInfo PosInfo { get; private set; } = new PositionInfo();
+
+        public GameObject()
+        {
+            Info.PosInfo = PosInfo;
+        }
 
         public Vector3Int CellPos
         {
             get
             {
-                return new Vector3Int(Info.PosInfo.PosX, Info.PosInfo.PosY, Info.PosInfo.PosZ);
+                return new Vector3Int(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
             }
             set
             {
-                Info.PosInfo.PosX = value.x;
-                Info.PosInfo.PosY = value.y;
-                Info.PosInfo.PosZ = value.z;
+                PosInfo.PosX = value.x;
+                PosInfo.PosY = value.y;
+                PosInfo.PosZ = value.z;
             }
+        }
+
+        public Vector3Int GetFrontCellPos()
+        {
+            return GetFrontCellPos(PosInfo.MoveDir);
         }
 
         public Vector3Int GetFrontCellPos(MoveDir dir)
