@@ -11,30 +11,53 @@ public class ObjectManager
 	//Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 	Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 	
-	public void Add(PlayerInfo info, bool myPlayer = false)
+	public static GameObjectType GetObjectTypeById(int id)
 	{
-		if (myPlayer)
-		{
-			GameObject go = Managers.Resource.Instantiate("Target");
-			go.name = info.Name;
-			_objects.Add(info.PlayerId, go);
+		int type = (id >> 24) & 0x7F;
+		return (GameObjectType)type;
+	}
 
-            MyTest = go.GetComponent<MyMonsterController>();
-			MyTest.Id = info.PlayerId;
-			MyTest.PosInfo = info.PosInfo;
-			MyTest.SyncPos();
-        }
-		else
+	public void Add(ObjectInfo info, bool myPlayer = false)
+	{
+		GameObjectType _objectType = GetObjectTypeById(info.ObjectId);
+		if (_objectType == GameObjectType.Player)
 		{
-            GameObject go = Managers.Resource.Instantiate("Seeker");
-            go.name = info.Name;
-            _objects.Add(info.PlayerId, go);
+            if (myPlayer)
+            {
+                GameObject go = Managers.Resource.Instantiate("Target");
+                go.name = info.Name;
+                _objects.Add(info.ObjectId, go);
 
-            MonsterController pc = go.GetComponent<MonsterController>();
-			pc.Id = info.PlayerId;
-			pc.PosInfo = info.PosInfo;
-            pc.SyncPos();
+                MyTest = go.GetComponent<MyMonsterController>();
+                MyTest.Id = info.ObjectId;
+                MyTest.PosInfo = info.PosInfo;
+                MyTest.SyncPos();
+            }
+            else
+            {
+                GameObject go = Managers.Resource.Instantiate("Seeker");
+                go.name = info.Name;
+                _objects.Add(info.ObjectId, go);
+
+                MonsterController pc = go.GetComponent<MonsterController>();
+                pc.Id = info.ObjectId;
+                pc.PosInfo = info.PosInfo;
+                pc.SyncPos();
+            }
         }
+		else if (_objectType == GameObjectType.Monster)
+		{
+
+		}
+		else if (_objectType == GameObjectType.Projectile)
+		{
+			//GameObject go = Managers.Resource.Instantiate("Creature/Arrow");
+			//go.name = "Arrow";
+			//_objects.Add(info.ObjectId, go);
+
+			// SkillController 추후 추가
+		}
+	
 	}
 
 	public void Remove(int id)

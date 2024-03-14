@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Google.Protobuf.WellKnownTypes;
+using Server.Game;
 using Server.Game.Room;
 using ServerCore;
 
@@ -37,11 +38,15 @@ namespace Server
 			Console.WriteLine("Listening...");
 
 			//FlushRoom();
-			JobTimer.Instance.Push(FlushRoom);
+			//JobTimer.Instance.Push(FlushRoom);
 
+			// TODO
 			while (true)
 			{
-				JobTimer.Instance.Flush();
+				//JobTimer.Instance.Flush();
+				RoomManager.Instnace.Find(1).Update();
+
+				Thread.Sleep(100);
 			}
 		}
 	}

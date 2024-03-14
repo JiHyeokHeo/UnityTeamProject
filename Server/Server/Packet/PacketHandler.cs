@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Server.Game.Room;
 using Server.Game.Object;
+using Server.Game;
 
 class PacketHandler
 {

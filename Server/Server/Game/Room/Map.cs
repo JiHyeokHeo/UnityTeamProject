@@ -91,7 +91,7 @@ namespace Server.Game.Room
         public int _gridSizeX, _gridSizeY;
 
         public bool[,] _collision;
-        Player[,] _players;
+        GameObject[,] _objects;
 
         public bool CanGo(Vector3Int cellPos)
         {
@@ -104,32 +104,42 @@ namespace Server.Game.Room
             return !_collision[cellPos.x, cellPos.y];
         }
 
-        public Player Find(Vector3Int cellPos)
+        public GameObject Find(Vector3Int cellPos)
         {
             if (cellPos.x < 0 || cellPos.x > _gridSizeX)
                 return null;
             if (cellPos.z < 0 || cellPos.z > _gridSizeY)
                 return null;
 
-            return _players[cellPos.x, cellPos.y];
+            return _objects[cellPos.x, cellPos.y];
         }
 
-        public bool ApplyMove(Player player, Vector3Int dest)
+        public bool ApplyLeave(GameObject gameObject)
         {
-            PositionInfo posInfo = player.Info.PosInfo;
+            PositionInfo posInfo = gameObject.PosInfo;
             if (posInfo.PosX < 0 || posInfo.PosX > _gridSizeX)
                 return false;
             if (posInfo.PosZ < 0 || posInfo.PosZ > _gridSizeY)
                 return false;
+
+            {
+                if (_objects[posInfo.PosX, posInfo.PosY] == gameObject)
+                    _objects[posInfo.PosX, posInfo.PosY] = null;
+            }
+
+            return true;
+        }
+
+        public bool ApplyMove(GameObject gameObject, Vector3Int dest)
+        {
+            ApplyLeave(gameObject);
+
+            PositionInfo posInfo = gameObject.PosInfo;
             if (CanGo(dest) == false)
                 return false;
 
             {
-                if (_players[posInfo.PosX, posInfo.PosY] == player)
-                    _players[posInfo.PosX, posInfo.PosY] = null;
-            }
-            {
-                _players[dest.x, dest.y] = player;
+                _objects[dest.x, dest.y] = gameObject;
             }
 
             // 실제 좌표이동
@@ -151,7 +161,7 @@ namespace Server.Game.Room
             _gridSizeX = int.Parse(reader.ReadLine());
             _gridSizeY = int.Parse(reader.ReadLine());
             _collision = new bool[_gridSizeX, _gridSizeY];
-            _players = new Player[_gridSizeX, _gridSizeY];
+            _objects = new GameObject[_gridSizeX, _gridSizeY];
 
             // 임시 땜방
             _gridWorldSizeX = 100.0f;
