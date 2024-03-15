@@ -49,3 +49,4 @@ C:\Unity\Project\Server\Server\obj\Debug\netcoreapp3.1\Server.csproj.CopyComplet
 C:\Unity\Project\Server\Server\obj\Debug\netcoreapp3.1\Server.dll
 C:\Unity\Project\Server\Server\obj\Debug\netcoreapp3.1\Server.pdb
 C:\Unity\Project\Server\Server\obj\Debug\netcoreapp3.1\Server.genruntimeconfig.cache
+C:\Unity\Project\Server\Server\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

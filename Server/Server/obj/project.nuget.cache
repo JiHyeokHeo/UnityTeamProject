@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "2Q556hLbpdtXFT+pEGw4f1Bl3jvxlEPidd58fMq8HtY3D1OBrNNBDmjQIYbzDmAl6ei9SB/bX06SBx72p+sYWQ==",
+  "dgSpecHash": "QjpxVLNa5TqQTaJs5FIe05ycoQz/EKC5dfK0724oZ9fcdSwOLVireSQEZgWCmr5a8LD12bIjFH3bVYz4p6K/rA==",
   "success": true,
   "projectFilePath": "C:\\Unity\\Project\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\google.protobuf\\3.15.0\\google.protobuf.3.15.0.nupkg.sha512",
+    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",

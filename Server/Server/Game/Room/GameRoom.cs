@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
+using Server.Data;
 using Server.Game.Object;
 using Server.Game.Room;
 using System;
@@ -136,7 +137,7 @@ namespace Server.Game
                 // 타인에게 정보 전송
                 {
                     S_Despawn despawnPacket = new S_Despawn();
-                    despawnPacket.PlayerIds.Add(objectId);
+                    despawnPacket.ObjectIds.Add(objectId);
                     foreach (Player p in _players.Values) 
                     {
                         if (p.Id != objectId)
@@ -195,29 +196,39 @@ namespace Server.Game
                 skill.Info.SkillId = skillPacket.Info.SkillId;
                 Broadcast(skill);
 
-                if(skillPacket.Info.SkillId == 1)
-                {
-                    // TODO : 데미지 판정
-                    Vector3Int skillPos = player.GetFrontCellPos(info.PosInfo.MoveDir);
-                    GameObject target = Map.Find(skillPos);
-                    if (target != null)
-                    {
-                        Console.WriteLine("Hit GameObject");
-                    }
-                }
-                else
-                {
-                    // TODO : 다양한 스킬
-                    Arrow arrow = ObjectManager.Instance.Add<Arrow>();
-                    if (arrow == null)
-                        return;
+                Data.Skill skillData = null;
+                if (DataManager.SkillDict.TryGetValue(skillPacket.Info.SkillId, out skillData) == false)
+                    return;
 
-                    arrow.Owner = player;
-                    arrow.PosInfo.State = CreatureState.Moving;
-                    arrow.PosInfo.MoveDir = player.PosInfo.MoveDir;
-                    arrow.PosInfo.PosX = player.PosInfo.PosX;
-                    arrow.PosInfo.PosY = player.PosInfo.PosY;
-                    EnterGame(arrow);
+                switch (skillData.skillType)
+                {
+                    case SkillType.SkillAuto:
+                        {
+                            // TODO : 데미지 판정
+                            Vector3Int skillPos = player.GetFrontCellPos(info.PosInfo.MoveDir);
+                            GameObject target = Map.Find(skillPos);
+                            if (target != null)
+                            {
+                                Console.WriteLine("Hit GameObject");
+                            }
+                        }
+                        break;
+                    case SkillType.SkillProjectile:
+                        {
+                            // TODO : 다양한 스킬
+                            Arrow arrow = ObjectManager.Instance.Add<Arrow>();
+                            if (arrow == null)
+                                return;
+
+                            arrow.Owner = player;
+                            arrow.Data = skillData;
+                            arrow.PosInfo.State = CreatureState.Moving;
+                            arrow.PosInfo.MoveDir = player.PosInfo.MoveDir;
+                            arrow.PosInfo.PosX = player.PosInfo.PosX;
+                            arrow.PosInfo.PosY = player.PosInfo.PosY;
+                            EnterGame(arrow);
+                        }
+                        break;
                 }
 
                 // 통과

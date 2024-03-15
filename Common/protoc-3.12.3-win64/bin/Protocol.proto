@@ -15,12 +15,11 @@ enum MsgId {
   S_SKILL = 7;
 }
 
-enum CreatureState
-{
-	IDLE = 0;
-	MOVING = 1;
-	SKILL = 2;
-	DEAD = 3;
+enum CreatureState {
+  IDLE = 0;
+  MOVING = 1;
+  SKILL = 2;
+  DEAD = 3;
 }
 
 enum MoveDir {
@@ -30,12 +29,17 @@ enum MoveDir {
   RIGHT = 3;
 }
 
-enum GameObjectType
-{
-	NONE = 0;
-	PLAYER = 1;
-	MONSTER = 2;
-	PROJECTILE = 3;
+enum GameObjectType {
+  NONE = 0;
+  PLAYER = 1;
+  MONSTER = 2;
+  PROJECTILE = 3;
+}
+
+enum SkillType {
+  SKILL_NONE = 0;
+  SKILL_AUTO = 1;
+  SKILL_PROJECTILE = 2;
 }
 
 message S_EnterGame {

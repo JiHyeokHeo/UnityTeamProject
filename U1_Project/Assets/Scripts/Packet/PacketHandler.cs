@@ -67,7 +67,6 @@ class PacketHandler
         if (mc != null)
         {
             mc.UseSkill(skillPacket.Info.SkillId);
-            return;
         }
 
     }
