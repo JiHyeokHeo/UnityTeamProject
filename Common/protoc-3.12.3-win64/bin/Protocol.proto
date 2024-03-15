@@ -79,6 +79,7 @@ message ObjectInfo {
   int32 objectId = 1;
   string name = 2;
   PositionInfo posInfo = 3;
+  StatInfo statInfo = 4;
 }
 
 message PositionInfo {
@@ -87,6 +88,15 @@ message PositionInfo {
   int32 posX = 3;
   int32 posY = 4;
   int32 posZ = 5;
+}
+
+message StatInfo {
+  int32 hp = 1;
+  int32 maxHp = 2;
+  int32 mp = 3;
+  int32 maxMp = 4;
+  float speed = 5;
+  int32 range = 6;
 }
 
 message SkillInfo {

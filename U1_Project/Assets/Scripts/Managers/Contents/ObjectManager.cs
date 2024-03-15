@@ -20,7 +20,8 @@ public class ObjectManager
 	public void Add(ObjectInfo info, bool myPlayer = false)
 	{
 		GameObjectType _objectType = GetObjectTypeById(info.ObjectId);
-		if (_objectType == GameObjectType.Player)
+
+        if (_objectType == GameObjectType.Player)
 		{
             if (myPlayer)
             {
@@ -31,6 +32,7 @@ public class ObjectManager
                 MyTest = go.GetComponent<MyMonsterController>();
                 MyTest.Id = info.ObjectId;
                 MyTest.PosInfo = info.PosInfo;
+				MyTest.Stat = info.StatInfo;
                 MyTest.SyncPos();
             }
             else
@@ -42,6 +44,7 @@ public class ObjectManager
                 MonsterController pc = go.GetComponent<MonsterController>();
                 pc.Id = info.ObjectId;
                 pc.PosInfo = info.PosInfo;
+                pc.Stat = info.StatInfo;
                 pc.SyncPos();
             }
         }

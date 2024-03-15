@@ -41,6 +41,7 @@ namespace Server.Game.Object
                 if (target != null)
                 {
                     // TODO : 피격판정
+                    target.OnDamaged(this, Data.damage);
                 }
 
                 // 소멸
