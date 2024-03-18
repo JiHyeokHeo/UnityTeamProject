@@ -1,7 +1,7 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Server.Data;
-using Server.Game.Object;
+using Server.Game;
 using Server.Game.Room;
 using System;
 using System.Collections.Generic;

@@ -36,7 +36,7 @@ public class MutiplayerBuildAndRun
         for (int i = 1; i <= playerCount; i++)
         {
             BuildPipeline.BuildPlayer(GetScenePaths(),
-                 "Builds/Win64/" + GetProjectName() + i.ToString() + "/" + GetProjectName() + i.ToString() + ".exe",
+                 "ServerConnect/Win64/" + GetProjectName() + i.ToString() + "/" + GetProjectName() + i.ToString() + ".exe",
                  BuildTarget.StandaloneWindows64, BuildOptions.AutoRunPlayer);
         }
     }

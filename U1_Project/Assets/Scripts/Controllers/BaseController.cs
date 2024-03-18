@@ -17,8 +17,8 @@ public abstract class BaseController : MonoBehaviour
                 return;
 
             _stat.Hp = value.Hp;
-            _stat.MaxMp = value.Hp;
-            _stat.Speed = value.Hp;
+            _stat.MaxMp = value.MaxHp;
+            _stat.Speed = value.Speed;
         }
     }
 

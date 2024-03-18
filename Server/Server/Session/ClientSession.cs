@@ -9,7 +9,6 @@ using System.Net;
 using Google.Protobuf.Protocol;
 using Google.Protobuf;
 using Server.Game.Room;
-using Server.Game.Object;
 using Server.Game;
 
 namespace Server

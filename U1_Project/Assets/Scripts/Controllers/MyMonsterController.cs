@@ -136,7 +136,7 @@ namespace Assets.Scripts.Controllers
                 C_Move movePacket = new C_Move();
                 movePacket.PosInfo = PosInfo;
                 Managers.Network.Send(movePacket);
-                Debug.Log("Test");
+                //Debug.Log("Test");
                 _updated = false;
             }
         }
