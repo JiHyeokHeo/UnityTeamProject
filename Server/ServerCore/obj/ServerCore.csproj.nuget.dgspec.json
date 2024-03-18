@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {}
+    "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {
+    "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
+        "projectUniqueName": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
         "projectName": "ServerCore",
-        "projectPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
+        "projectPath": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
         "packagesPath": "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\obj\\",
+        "outputPath": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HEOJIHYEOK\\AppData\\Roaming\\NuGet\\NuGet.Config",

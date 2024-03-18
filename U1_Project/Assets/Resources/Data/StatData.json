@@ -1,28 +1,31 @@
 {
   "stats": [
-      {
-        "name": "Rio",
-        "level": "1",
-        "hp": "100",
-        "mp": "50",
-        "attack": "10",
-        "attackRange" : "5"
-      },
-      {
-        "name": "Rio",
-        "level": "2",
-        "hp": "150",
-        "mp": "100",
-        "attack": "10",
-        "attackRange": "5"
-      },
-      {
-        "name": "Rio",
-        "level": "3",
-        "hp": "200",
-        "mp": "150",
-        "attack": "10",
-        "attackRange": "5"
-      }
-    ]
+    {
+      "name": "Rio",
+      "level": "1",
+      "maxhp": "100",
+      "maxmp": "50",
+      "attack": "10",
+      "attackRange": "5",
+      "speed": "10.0"
+    },
+    {
+      "name": "Rio",
+      "level": "2",
+      "maxhp": "150",
+      "maxmp": "100",
+      "attack": "10",
+      "attackRange": "5",
+      "speed": "10.0"
+    },
+    {
+      "name": "Rio",
+      "level": "3",
+      "maxhp": "200",
+      "maxmp": "150",
+      "attack": "10",
+      "attackRange": "5",
+      "speed" : "10.0"
+    }
+  ]
 }

@@ -10,6 +10,7 @@ using Google.Protobuf.Protocol;
 using Google.Protobuf;
 using Server.Game.Room;
 using Server.Game;
+using Server.Data;
 
 namespace Server
 {
@@ -43,6 +44,10 @@ namespace Server
 				MyPlayer.Info.PosInfo.PosX = 0;
 				MyPlayer.Info.PosInfo.PosY = 0;
 				MyPlayer.Info.PosInfo.PosZ = 0;
+
+				StatInfo stat = null;
+				DataManager.StatDict.TryGetValue(1, out stat);
+				MyPlayer.Stat.MergeFrom(stat);
 
 				MyPlayer.Session = this;
 			}

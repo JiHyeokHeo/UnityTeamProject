@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj": {}
+    "C:\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {
+    "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
+        "projectUniqueName": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
         "projectName": "ServerCore",
-        "projectPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
+        "projectPath": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj",
         "packagesPath": "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\obj\\",
+        "outputPath": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HEOJIHYEOK\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,14 +64,14 @@
         }
       }
     },
-    "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj": {
+    "C:\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj",
+        "projectPath": "C:\\Project\\UnityTeamProject\\Server\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\Server\\obj\\",
+        "outputPath": "C:\\Project\\UnityTeamProject\\Server\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HEOJIHYEOK\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {
-                "projectPath": "C:\\Users\\HEOJIHYEOK\\Desktop\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj"
+              "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj": {
+                "projectPath": "C:\\Project\\UnityTeamProject\\Server\\ServerCore\\ServerCore.csproj"
               }
             }
           }

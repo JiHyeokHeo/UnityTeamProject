@@ -6,27 +6,30 @@ using System.Text;
 namespace Server.Data
 {
     #region Stat
-    [Serializable]
-    public class Stat
-    {
-        public string name;
-        public int level;
-        public int hp;
-        public int mp;
-        public int attack;
-        public int attackRange;
-    }
+    //public class Stat
+    //{
+    //    public string name;
+    //    public int level;
+    //    public int hp;
+    //    public int mp;
+    //    public int attack;
+    //    public int attackRange;
+    //}
 
     [Serializable]
-    public class StatData : ILoader<int, Stat>
+    public class StatData : ILoader<int, StatInfo>
     {
-        public List<Stat> stats = new List<Stat>();
+        public List<StatInfo> stats = new List<StatInfo>();
 
-        public Dictionary<int, Stat> MakeDict()
+        public Dictionary<int, StatInfo> MakeDict()
         {
-            Dictionary<int, Stat> tempDict = new Dictionary<int, Stat>();
-            foreach (Stat stat in stats)
-                tempDict.Add(stat.level, stat);
+            Dictionary<int, StatInfo> tempDict = new Dictionary<int, StatInfo>();
+            foreach (StatInfo stat in stats)
+            {
+                stat.Hp = stat.MaxMp;
+                stat.Mp = stat.MaxMp;
+                tempDict.Add(stat.Level, stat);
+            }
             return tempDict;
         }
     }

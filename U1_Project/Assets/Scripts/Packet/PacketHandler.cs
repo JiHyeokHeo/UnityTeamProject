@@ -48,11 +48,11 @@ class PacketHandler
         if (go == null)
             return;
 
-        BaseController mc = go.GetComponent<BaseController>();
-        if (mc == null)
+        BaseController bc = go.GetComponent<BaseController>();
+        if (bc == null)
             return;
 
-        mc.PosInfo = movePacket.PosInfo;
+        bc.PosInfo = movePacket.PosInfo;
     }
 
     public static void S_SkillHandler(PacketSession session, IMessage packet)
@@ -63,10 +63,28 @@ class PacketHandler
         if (go == null)
             return;
 
-        BaseController mc = go.GetComponent<BaseController>();
-        if (mc != null)
+        BaseController bc = go.GetComponent<BaseController>();
+        if (bc != null)
         {
-            mc.UseSkill(skillPacket.Info.SkillId);
+            bc.UseSkill(skillPacket.Info.SkillId);
+        }
+
+    }
+
+    public static void S_ChangeHpHandler(PacketSession session, IMessage packet)
+    {
+        S_ChangeHp changePacket = packet as S_ChangeHp;
+
+        GameObject go = Managers.Object.FindById(changePacket.ObjectId);
+        if (go == null)
+            return;
+
+        BaseController bc = go.GetComponent<BaseController>();
+        if (bc != null)
+        {
+            bc.Stat.Hp = changePacket.Hp;
+
+            Debug.Log($"ChangeHp : {changePacket.Hp}");
         }
 
     }

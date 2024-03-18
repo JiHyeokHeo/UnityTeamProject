@@ -10,13 +10,11 @@ public interface ILoader<Key, Value>
 
 public class DataManager  
 {
-    public Dictionary<int, Data.Stat> StatDict { get; private set; } = new Dictionary<int, Data.Stat>();
     public static Dictionary<int, Data.Skill> SkillDict { get; private set; } = new Dictionary<int, Data.Skill>();
     // TODO 추후 늘릴게 필요하다면 늘려라.
 
     public void Init()
     {
-        StatDict = LoadJson<Data.StatData, int, Data.Stat>("StatData").MakeDict();
         SkillDict = LoadJson<Data.SkillData, int, Data.Skill>("SkillData").MakeDict();
     }
 
