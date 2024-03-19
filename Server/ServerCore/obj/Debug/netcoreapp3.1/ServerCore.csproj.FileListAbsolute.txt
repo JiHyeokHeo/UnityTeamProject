@@ -46,3 +46,13 @@ C:\Users\HEOJIHYEOK\Desktop\Project\UnityTeamProject\Server\ServerCore\obj\Debug
 C:\Users\HEOJIHYEOK\Desktop\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.sourcelink.json
 C:\Users\HEOJIHYEOK\Desktop\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.dll
 C:\Users\HEOJIHYEOK\Desktop\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.pdb
+C:\Project\UnityTeamProject\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.deps.json
+C:\Project\UnityTeamProject\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.dll
+C:\Project\UnityTeamProject\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.pdb
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfoInputs.cache
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfo.cs
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.csproj.CoreCompileInputs.cache
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.sourcelink.json
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.dll
+C:\Project\UnityTeamProject\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.pdb

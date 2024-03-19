@@ -14,7 +14,7 @@ public class GameScene : BaseScene
 
         //Managers.UI.ShowSceneUI<UI_Monster_Selector>();
 
-        Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
+        //Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
 
         Screen.SetResolution(640, 480, false);
         Managers.Map.Load();

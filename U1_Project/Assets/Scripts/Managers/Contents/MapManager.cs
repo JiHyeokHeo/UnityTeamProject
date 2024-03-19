@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,6 +68,15 @@ public class MapManager
         }
     }
 
+    //public bool CanGo(Vector3Int cellPos)
+    //{
+    //    if (cellPos.x < 0 || cellPos.x >= _gridSizeX)
+    //        return false;
+    //    if (cellPos.z < 0 || cellPos.z >= _gridSizeY)
+    //        return false;
+
+    //    return !_collision[cellPos.x, cellPos.y];
+    //}
     public bool SearchRange(Node node, int range)
     {
         for (int x = -range; x <= range; x++)

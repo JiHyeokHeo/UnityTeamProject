@@ -8,7 +8,7 @@ public abstract class BaseController : MonoBehaviour
     public int Id { get; set; }
     
     StatInfo _stat = new StatInfo();
-    public StatInfo Stat
+    public virtual StatInfo Stat
     {
         get { return _stat; }
         set 
@@ -17,11 +17,19 @@ public abstract class BaseController : MonoBehaviour
                 return;
 
             _stat.Hp = value.Hp;
-            _stat.MaxMp = value.MaxHp;
+            _stat.MaxHp = value.MaxHp;
             _stat.Speed = value.Speed;
         }
     }
 
+    public virtual int Hp
+    {
+        get { return Stat.Hp; }
+        set
+        {
+            Stat.Hp = value;
+        }
+    }
     public float Speed
     {
         get { return Stat.Speed;}
@@ -70,7 +78,6 @@ public abstract class BaseController : MonoBehaviour
         }
     }
 
-
     public MoveDir Dir
     {
         get { return PosInfo.MoveDir; }
@@ -88,7 +95,6 @@ public abstract class BaseController : MonoBehaviour
     }
 
     protected GameObject _lockTarget;
-
     public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;
 
     protected Animator _animator;
@@ -123,7 +129,7 @@ public abstract class BaseController : MonoBehaviour
         PosInfo.State = CreatureState.Idle;
         Dir = MoveDir.Down;
         // 애니메이션 업데이트 추가 예정
-        // UpdateAnimation();
+        UpdateAnimation();
     }
 
     protected virtual void UpdateAnimation()
@@ -169,6 +175,7 @@ public abstract class BaseController : MonoBehaviour
     }
 
     protected virtual void UpdateIdle() { }
+
     protected virtual void UpdateDie() { }
 
     public virtual void UseSkill(int skillId) { }
@@ -178,7 +185,7 @@ public abstract class BaseController : MonoBehaviour
         //if (_isMoving == false)
         //    return;
 
-        Vector3 destPos = Managers.Map.CellPosToWorldPoint(CellPos) + new Vector3(0.5f, 0.0f, 0.5f);
+        Vector3 destPos = Managers.Map.CellPosToWorldPoint(CellPos) + new Vector3(0.0f, 4.0f, -5.0f);
         Vector3 moveDir = destPos - transform.position;
 
         // 도착 여부 체크
@@ -214,6 +221,5 @@ public abstract class BaseController : MonoBehaviour
             
 
     }
-
 
 }

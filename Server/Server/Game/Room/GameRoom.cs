@@ -5,7 +5,9 @@ using Server.Game;
 using Server.Game.Room;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
+using System.Threading;
 
 namespace Server.Game
 {
@@ -51,6 +53,8 @@ namespace Server.Game
                     _players.Add(gameObject.Id, player);
                     player.Room = this;
 
+                    Map.ApplyMove(player, new Vector3Int(player.CellPos.x, player.CellPos.y, player.CellPos.z));
+
                     // 본인한테 정보 전송
                     {
                         S_EnterGame enterPacket = new S_EnterGame();
@@ -64,21 +68,32 @@ namespace Server.Game
                                 spawnPacket.Objects.Add(p.Info);
                         }
                         player.Session.Send(spawnPacket);
+                        foreach (Monster m in _monsters.Values)
+                        {
+                            spawnPacket.Objects.Add(m.Info);
+                        }
+                        foreach (Projectile p in _projectiles.Values)
+                        {
+                            spawnPacket.Objects.Add(p.Info);
+                        }
+                        player.Session.Send(spawnPacket);
                     }
-
-           
                 }
                 else if (type == GameObjectType.Monster)
                 {
                     Monster monster = gameObject as Monster;
                     _monsters.Add(gameObject.Id, monster);
                     monster.Room = this;
+
+                    Map.ApplyMove(monster, new Vector3Int(monster.CellPos.x, monster.CellPos.y, monster.CellPos.z));
                 }
                 else if (type == GameObjectType.Projectile)
                 {
                     Projectile projectile = gameObject as Projectile;
                     _projectiles.Add(gameObject.Id, projectile);
                     projectile.Room = this;
+
+                    Map.ApplyMove(projectile, new Vector3Int(projectile.CellPos.x, projectile.CellPos.y, projectile.CellPos.z));
                 }
 
                 // 타인한테 정보 전송

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class MonsterController : BaseController
+public class MonsterController : CreatureController
 {
     protected Coroutine _coSkill;
 

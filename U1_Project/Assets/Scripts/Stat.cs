@@ -22,8 +22,8 @@ public class Stat : MonoBehaviour
     {
         _level = 1;
 
-        Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
-        Data.Stat stat = dict[1];
+        //Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
+        //Data.Stat stat = dict[1];
 
         //_hp = stat.hp;
     }

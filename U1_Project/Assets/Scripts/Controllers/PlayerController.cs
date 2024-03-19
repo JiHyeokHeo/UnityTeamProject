@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : BaseController
+public class PlayerController : CreatureController
 {
     public enum PlayerState
     {
@@ -14,6 +14,7 @@ public class PlayerController : BaseController
 
     protected override void Init()
     {
+        base.Init();
         WorldObjectType = Define.WorldObject.Player;
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;

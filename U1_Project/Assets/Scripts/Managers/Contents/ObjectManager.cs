@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ObjectManager
 {
-	public MonsterController MyTest { get; set; }
+	public MonsterController MyPlayer { get; set; }
 	//Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 	Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 	
@@ -29,11 +29,11 @@ public class ObjectManager
                 go.name = info.Name;
                 _objects.Add(info.ObjectId, go);
 
-                MyTest = go.GetComponent<MyMonsterController>();
-                MyTest.Id = info.ObjectId;
-                MyTest.PosInfo = info.PosInfo;
-				MyTest.Stat = info.StatInfo;
-                MyTest.SyncPos();
+                MyPlayer = go.GetComponent<MyMonsterController>();
+                MyPlayer.Id = info.ObjectId;
+                MyPlayer.PosInfo = info.PosInfo;
+				MyPlayer.Stat = info.StatInfo;
+                MyPlayer.SyncPos();
             }
             else
             {
@@ -73,15 +73,6 @@ public class ObjectManager
 		Managers.Resource.Destroy(go);
 	}
 
-	public void RemoveMyPlayer()
-	{
-		if (MyTest == null)
-			return;
-
-		Remove(MyTest.Id);
-		MyTest = null;
-	}
-
 	public GameObject FindById(int id)
 	{
 		GameObject go = null;
@@ -89,7 +80,7 @@ public class ObjectManager
 		return go;
 	}
 
-	public GameObject Find(Vector3Int cellPos)
+	public GameObject FindCreature(Vector3Int cellPos)
 	{
 		foreach (GameObject obj in _objects.Values)
 		{
@@ -121,5 +112,6 @@ public class ObjectManager
 			Managers.Resource.Destroy(obj);
 
 		_objects.Clear();
-	}
+        MyPlayer = null;
+    }
 }

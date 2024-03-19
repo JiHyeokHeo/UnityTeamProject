@@ -120,7 +120,7 @@ namespace Assets.Scripts.Controllers
                     break;
             }
 
-            if (Managers.Object.Find(destPos) == null)
+            if (Managers.Object.FindCreature(destPos) == null)
             {
                 CellPos = destPos;
             }
