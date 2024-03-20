@@ -95,7 +95,6 @@ public abstract class BaseController : MonoBehaviour
     }
 
     protected GameObject _lockTarget;
-    public Define.WorldObject WorldObjectType { get; protected set; } = Define.WorldObject.Unknown;
 
     protected Animator _animator;
     public virtual CreatureState State
@@ -126,8 +125,10 @@ public abstract class BaseController : MonoBehaviour
     protected virtual void Init()
     {
         _animator = GetComponent<Animator>();
-        PosInfo.State = CreatureState.Idle;
+        State = CreatureState.Idle;
         Dir = MoveDir.Down;
+        Vector3 Pos = Managers.Map.CellPosToWorldPoint(CellPos) + new Vector3(0.0f, 4.0f, -5.0f);
+        transform.position = Pos;
         // 애니메이션 업데이트 추가 예정
         UpdateAnimation();
     }

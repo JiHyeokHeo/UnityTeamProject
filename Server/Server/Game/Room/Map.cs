@@ -6,6 +6,7 @@ using System.IO;
 using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace Server.Game.Room
 {
@@ -26,7 +27,11 @@ namespace Server.Game.Room
             _worldPosition = worldPos;
             _gridX = gridX;
             _gridY = gridY;
-
+        }
+        public Node(int gridX, int gridY)
+        {
+            _gridX = gridX;
+            _gridY = gridY;
         }
 
         public int FCost { get { return _gCost + _hCost; } }
@@ -76,6 +81,10 @@ namespace Server.Game.Room
         {
             return new Vector3Int(a.x / b, a.y / b, a.z / b);
         }
+
+        public float magnitude { get { return (float)Math.Sqrt(sqrMagnitude); } }  
+        public int sqrMagnitude { get { return (x * x + z * z); } }
+        public int cellDistFromZero { get { return Math.Abs(x) + Math.Abs(z); } }
     }
 
 
@@ -93,15 +102,14 @@ namespace Server.Game.Room
         public bool[,] _collision;
         GameObject[,] _objects;
 
-        public bool CanGo(Vector3Int cellPos)
+        public bool CanGo(Vector3Int cellPos, bool checkObjects = true)
         {
             if (cellPos.x < 0 || cellPos.x >= _gridSizeX)
                 return false;
             if (cellPos.z < 0 || cellPos.z >= _gridSizeY)
                 return false;
 
-
-            return !_collision[cellPos.x, cellPos.y];
+            return !_collision[cellPos.x, cellPos.z] || (!checkObjects || _objects[cellPos.x, cellPos.z] == null);
         }
 
         public GameObject Find(Vector3Int cellPos)
@@ -135,7 +143,7 @@ namespace Server.Game.Room
             ApplyLeave(gameObject);
 
             PositionInfo posInfo = gameObject.PosInfo;
-            if (CanGo(dest) == false)
+            if (CanGo(dest, true) == false)
                 return false;
 
             {
@@ -162,7 +170,6 @@ namespace Server.Game.Room
             _gridSizeY = int.Parse(reader.ReadLine());
             _collision = new bool[_gridSizeX, _gridSizeY];
             _objects = new GameObject[_gridSizeX, _gridSizeY];
-
             // 임시 땜방
             _gridWorldSizeX = 100.0f;
             _gridWorldSizeY = 90.0f;
@@ -178,56 +185,31 @@ namespace Server.Game.Room
                     _collision[x, y] = line[x] == '1' ? true : false;
                 }
             }
-        }
 
-        public void Load()
-        {
-            _nodeDiameter = _nodeRadius * 2;
-            _gridSizeX = (int)Math.Round(_gridWorldSizeX / _nodeDiameter, 0); // X 칸수 
-            _gridSizeY = (int)Math.Round(_gridWorldSizeY / _nodeDiameter, 0); // Y 칸수
-            CreateGrid();
-        }
-
-        void CreateGrid()
-        {
             _grid = new Node[_gridSizeX, _gridSizeY];
-            Vector3Int worldBottomLeft = Vector3Int.zero - Vector3Int.right * _gridWorldSizeX / 2 - Vector3Int.up * _gridWorldSizeY / 2;
-
             for (int x = 0; x < _gridSizeX; x++)
             {
                 for (int y = 0; y < _gridSizeY; y++)
                 {
-                    // 좌하단 끝점에서 중앙을 기준으로 지름만큼 움직이는 원리
-                    Vector3Int worldPoint = worldBottomLeft + Vector3Int.right * (x * _nodeDiameter + _nodeRadius) + Vector3Int.up * (y * _nodeDiameter + _nodeRadius);
-
-                    // TODO 임시로 walkable true;
-                    //bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkableMask));
-                    bool walkable = true;
-                    _grid[x, y] = new Node(walkable, worldPoint, x, y); // 그리드 정보 담기
+                    _grid[x, y] = new Node(x, y); // 그리드 정보 담기
                 }
             }
         }
 
+        int[] _dy = { 1, 0, -1, 0 };
+        int[] _dx = { 0, -1, 0, 1 };
         public List<Node> GetNeighbours(Node node)
         {
             List<Node> neighbours = new List<Node>();
 
-            // 상하좌우대각선 검색 3x3 8칸 검색
-            for (int x = -1; x <= 1; x++)
+            // 상하좌우 4칸으로 변경
+            for (int i = 0; i < 4; i++)
             {
-                for (int y = -1; y <= 1; y++)
-                {
-                    // 자기 자신은 제외
-                    if (x == 0 && y == 0)
-                        continue;
+                int checkX = node._gridX + _dx[i];
+                int checkY = node._gridY + _dy[i];
 
-                    int checkX = node._gridX + x;
-                    int checkY = node._gridY + y;
-
-                    if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
-                        neighbours.Add(_grid[checkX, checkY]);
-
-                }
+                if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
+                    neighbours.Add(_grid[checkX, checkY]);  
             }
 
             return neighbours;
@@ -247,11 +229,16 @@ namespace Server.Game.Room
             return _grid[x, y];
         }
 
-        #region Astar 길찾기
-        void FindPath(Vector3Int startPos, Vector3Int targetPos)
+        public Node NodeFromCellPos(Vector3Int cellPos)
         {
-            Node startNode = NodeFromWorldPoint(startPos);
-            Node targetNode = NodeFromWorldPoint(targetPos);
+            return _grid[cellPos.x, cellPos.z];
+        }
+
+        #region Astar 길찾기
+        public List<Node> FindPath(Vector3Int startPos, Vector3Int targetPos, bool checkObjects = true)
+        {
+            Node startNode = NodeFromCellPos(startPos);
+            Node targetNode = NodeFromCellPos(targetPos);
 
             List<Node> openSet = new List<Node>();
 
@@ -276,14 +263,18 @@ namespace Server.Game.Room
                 // 도착하면 리턴
                 if (currentNode == targetNode)
                 {
-                    RetracePath(startNode, targetNode);
-                    return;
+                    return RetracePath(startNode, targetNode);
                 }
 
                 List<Node> nodeNeigbours = GetNeighbours(currentNode);
                 foreach (Node neighbour in nodeNeigbours)
                 {
-                    if (!neighbour._walkable || closedSet.Contains(neighbour))
+                    Vector3Int nextPos = new Vector3Int(neighbour._gridX, startPos.y, neighbour._gridY);
+
+                    if (CanGo(nextPos, checkObjects) == false)
+                        continue;
+
+                    if (closedSet.Contains(neighbour))
                         continue;
 
                     // 현재 노드에서 자기 주변 노드로의 거리
@@ -298,11 +289,11 @@ namespace Server.Game.Room
                             openSet.Add(neighbour);
                     }
                 }
-
             }
+            return RetracePath(startNode, targetNode);
         }
 
-        void RetracePath(Node startNode, Node endNode)
+        List<Node> RetracePath(Node startNode, Node endNode)
         {
             List<Node> path = new List<Node>();
             Node currentNode = endNode;
@@ -312,9 +303,11 @@ namespace Server.Game.Room
                 path.Add(currentNode);
                 currentNode = currentNode._parent;
             }
+            path.Add(startNode);
             path.Reverse();
 
             _path = path;
+            return path;
         }
 
         int GetDistance(Node nodeA, Node nodeB)
@@ -322,9 +315,9 @@ namespace Server.Game.Room
             int disX = Math.Abs(nodeA._gridX - nodeB._gridX);
             int disY = Math.Abs(nodeA._gridY - nodeB._gridY);
 
-            if (disX > disY)
-                return 14 * disY + 10 * (disX - disY);
-            return 14 * disX + 10 * (disY - disX);
+            if (disX > disY) 
+                return 10 * disY + 10 * (disX - disY);
+            return 10 * disX + 10 * (disY - disX);
         }
         #endregion
     }

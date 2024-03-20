@@ -28,19 +28,19 @@ public class Stat : MonoBehaviour
         //_hp = stat.hp;
     }
 
-    public virtual void OnAttacked(Stat attacker)
-    {
-        int dmg = Mathf.Max(0, attacker.Attack - Defense);
-        Hp -= dmg;
-        if (Hp <= 0)
-        {
-            Hp = 0;
-            OnDead(attacker);
-        }
-    }
+    //public virtual void OnAttacked(Stat attacker)
+    //{
+    //    int dmg = Mathf.Max(0, attacker.Attack - Defense);
+    //    Hp -= dmg;
+    //    if (Hp <= 0)
+    //    {
+    //        Hp = 0;
+    //        OnDead(attacker);
+    //    }
+    //}
 
-    protected virtual void OnDead(Stat attacker)
-    {
-        Managers.Game.DeSpawn(gameObject);
-    }
+    //protected virtual void OnDead(Stat attacker)
+    //{
+    //    Managers.Game.DeSpawn(gameObject);
+    //}
 }

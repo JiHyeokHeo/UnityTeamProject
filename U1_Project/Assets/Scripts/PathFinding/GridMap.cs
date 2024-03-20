@@ -55,27 +55,20 @@ public class GridMap : MonoBehaviour
 
         return false;
     }
-
+    int[] _dy = { 1, 0, -1, 0 };
+    int[] _dx = { 0, -1, 0, 1 };
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
 
-        // 상하좌우대각선 검색 3x3 8칸 검색
-        for (int x = -1; x <= 1; x++)
+        // 상하좌우 4칸으로 변경
+        for (int i = 0; i < 4; i++)
         {
-            for (int y = -1; y <= 1; y++)
-            {
-                // 자기 자신은 제외
-                if (x == 0 && y == 0)
-                    continue;
+            int checkX = node._gridX + _dx[i];
+            int checkY = node._gridY + _dy[i];
 
-                int checkX = node._gridX + x;
-                int checkY = node._gridY + y;
-
-                if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
-                    neighbours.Add(_grid[checkX, checkY]);
-
-            }
+            if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
+                neighbours.Add(_grid[checkX, checkY]);
         }
 
         return neighbours;
@@ -98,24 +91,24 @@ public class GridMap : MonoBehaviour
     public List<Node> _path;
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireCube(transform.position, new Vector3(_gridWorldSize.x, 1, _gridWorldSize.y));
+        Gizmos.DrawWireCube(transform.position, new Vector3(_gridWorldSize.x, 1, _gridWorldSize.y));
 
-        //if (_grid != null)
-        //{
-        //    Node playerNode = Managers.Map.NodeFromWorldPoint(new Vector3(0,0,0));
-        //    foreach (Node node in _grid)
-        //    {
-        //        Gizmos.color = (node._walkable) ? Color.white : Color.red;
-        //        if (playerNode == node)
-        //            Gizmos.color = Color.cyan;
+        if (_grid != null)
+        {
+            Node playerNode = Managers.Map.NodeFromWorldPoint(new Vector3(0, 0, 0));
+            foreach (Node node in _grid)
+            {
+                Gizmos.color = (node._walkable) ? Color.white : Color.red;
+                if (playerNode == node)
+                    Gizmos.color = Color.cyan;
 
-        //        if (_path != null)
-        //            if (_path.Contains(node))
-        //                Gizmos.color = Color.black;
+                if (_path != null)
+                    if (_path.Contains(node))
+                        Gizmos.color = Color.black;
 
-        //        Gizmos.DrawCube(node._worldPosition, Vector3.one * (_nodeDiameter) - new Vector3(0.0f, 9.0f, 0.0f));
-        //    }
-        //}
+                Gizmos.DrawCube(node._worldPosition, Vector3.one * (_nodeDiameter) - new Vector3(0.0f, 9.0f, 0.0f));
+            }
+        }
     }
 
 }

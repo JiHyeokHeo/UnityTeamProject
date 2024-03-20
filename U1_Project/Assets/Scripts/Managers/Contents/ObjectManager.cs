@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Controllers;
-using Google.Protobuf.Protocol;
+﻿using Google.Protobuf.Protocol;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 public class ObjectManager
 {
-	public MonsterController MyPlayer { get; set; }
+	public MyPlayerController MyPlayer { get; set; }
 	//Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 	Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 	
@@ -25,11 +24,11 @@ public class ObjectManager
 		{
             if (myPlayer)
             {
-                GameObject go = Managers.Resource.Instantiate("Target");
+                GameObject go = Managers.Resource.Instantiate("Creature/MyPlayer");
                 go.name = info.Name;
                 _objects.Add(info.ObjectId, go);
 
-                MyPlayer = go.GetComponent<MyMonsterController>();
+                MyPlayer = go.GetComponent<MyPlayerController>();
                 MyPlayer.Id = info.ObjectId;
                 MyPlayer.PosInfo = info.PosInfo;
 				MyPlayer.Stat = info.StatInfo;
@@ -37,11 +36,11 @@ public class ObjectManager
             }
             else
             {
-                GameObject go = Managers.Resource.Instantiate("Seeker");
+                GameObject go = Managers.Resource.Instantiate("Creature/Player");
                 go.name = info.Name;
                 _objects.Add(info.ObjectId, go);
 
-                MonsterController pc = go.GetComponent<MonsterController>();
+                PlayerController pc = go.GetComponent<PlayerController>();
                 pc.Id = info.ObjectId;
                 pc.PosInfo = info.PosInfo;
                 pc.Stat = info.StatInfo;
@@ -50,13 +49,21 @@ public class ObjectManager
         }
 		else if (_objectType == GameObjectType.Monster)
 		{
+            GameObject go = Managers.Resource.Instantiate("Creature/Monster");
+            go.name = info.Name;
+            _objects.Add(info.ObjectId, go);
 
-		}
+            MonsterController mc = go.GetComponent<MonsterController>();
+            mc.Id = info.ObjectId;
+            mc.PosInfo = info.PosInfo;
+            mc.Stat = info.StatInfo;
+	        mc.SyncPos();
+        }
 		else if (_objectType == GameObjectType.Projectile)
 		{
 			//GameObject go = Managers.Resource.Instantiate("Creature/Arrow");
 			//go.name = "Arrow";
-			//_objects.Add(info.ObjectId, go);
+			//_objects.Add(info.ObjectId, go);	
 
 			// SkillController 추후 추가
 		}

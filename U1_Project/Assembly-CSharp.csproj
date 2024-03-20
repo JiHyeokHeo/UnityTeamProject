@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Managers\Core\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Stat.cs" />
     <Compile Include="Assets\Scripts\Managers\Core\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MyPlayerController.cs" />
     <Compile Include="Assets\Scripts\RayCast.cs" />
     <Compile Include="Assets\Scripts\UI\Scene\UI_Scene.cs" />
     <Compile Include="Assets\Scripts\Managers\Core\SoundManager.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Assets\Scripts\Managers\Contents\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\Packet\PacketHandler.cs" />
     <Compile Include="Assets\Scripts\Managers\Core\Poolable.cs" />
-    <Compile Include="Assets\Scripts\Controllers\MyMonsterController.cs" />
     <Compile Include="Assets\Scripts\UI\SubMonster\UI_Monster_Icon.cs" />
     <Compile Include="Assets\Scripts\Managers\Core\SceneManagerEX.cs" />
     <Compile Include="Assets\Scripts\ServerCore\Connector.cs" />
@@ -96,15 +96,15 @@
     <Compile Include="Assets\Scripts\Test.cs" />
     <Compile Include="Assets\Scripts\Packet\ServerSession.cs" />
     <Compile Include="Assets\Scripts\Managers\Core\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Contents\HpBar.cs" />
     <Compile Include="Assets\Scripts\Scenes\LoginScene.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CreatureController.cs" />
     <Compile Include="Assets\Scripts\Managers\Network\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\ServerCore\Session.cs" />
     <Compile Include="Assets\Scripts\Utils\Util.cs" />
     <Compile Include="Assets\Scripts\UI\UI_EventHandler.cs" />
     <Compile Include="Assets\Scripts\Utils\Extension.cs" />
-    <Compile Include="Assets\Scripts\Contents\HpBar.cs" />
-    <Compile Include="Assets\Scripts\Controllers\CreatureController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Art\UnityChan\Shader\Unitychan_chara_fuku.shader" />

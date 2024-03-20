@@ -63,7 +63,7 @@ class PacketHandler
         if (go == null)
             return;
 
-        BaseController bc = go.GetComponent<BaseController>();
+        PlayerController bc = go.GetComponent<PlayerController>();
         if (bc != null)
         {
             bc.UseSkill(skillPacket.Info.SkillId);
@@ -79,7 +79,7 @@ class PacketHandler
         if (go == null)
             return;
 
-        BaseController bc = go.GetComponent<BaseController>();
+        CreatureController bc = go.GetComponent<CreatureController>();
         if (bc != null)
         {
             bc.Hp = changePacket.Hp;

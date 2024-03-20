@@ -72,8 +72,10 @@ namespace Server.Game
                     if (_players.TryGetValue(objectId, out player))
                         return player;
                 }
-                return null;
             }
+
+            return null;
+
         }
     }
 }

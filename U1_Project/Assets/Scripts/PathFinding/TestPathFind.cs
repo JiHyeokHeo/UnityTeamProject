@@ -66,7 +66,7 @@ public class TestPathFind : MonoBehaviour
             List<Node> nodeNeigbours = Managers.Map.GetNeighbours(currentNode);
             foreach (Node neighbour in nodeNeigbours)
             {
-                if(!neighbour._walkable || closedSet.Contains(neighbour))
+                if (!neighbour._walkable || closedSet.Contains(neighbour))
                     continue;
 
                 // 현재 노드에서 자기 주변 노드로의 거리
@@ -106,7 +106,7 @@ public class TestPathFind : MonoBehaviour
         int disY = Mathf.Abs(nodeA._gridY - nodeB._gridY);
 
         if (disX > disY)
-            return 14 * disY + 10 * (disX - disY);
-        return 14 * disX + 10 * (disY - disX);
+            return 10 * disY + 10 * (disX - disY);
+        return 10 * disX + 10 * (disY - disX);
     }
 }

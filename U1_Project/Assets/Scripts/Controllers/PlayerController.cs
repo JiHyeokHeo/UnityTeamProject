@@ -1,90 +1,59 @@
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : CreatureController
 {
-    public enum PlayerState
-    {
-        Die,
-        Moving,
-        Idle,
-        Channeling,
-    }
+    protected Coroutine _coSkill;
 
     protected override void Init()
     {
         base.Init();
-        WorldObjectType = Define.WorldObject.Player;
-        Managers.Input.KeyAction -= OnKeyboard;
-        Managers.Input.KeyAction += OnKeyboard;
-        Managers.Input.MouseAction -= OnMouseClicked;
-        Managers.Input.MouseAction += OnMouseClicked;
-        //Managers.Resource.Instantiate("UI/UI_Button");
-
-        //Managers.UI.ShowPopupUI<UI_Button>();
-
-        //Managers.UI.ClosePopupUI(button);
     }
 
-    protected override void UpdateDie()
+    void Start()
     {
-        // 아무것도 못함
+        Init();
     }
 
-    protected override void UpdateMoving()
+    protected override void UpdateController()
+    {
+        base.UpdateController();
+    }
+
+    public override void UseSkill(int skillId)
+    {
+        if (skillId == 1)
+        {
+            _coSkill = StartCoroutine("CoStartPunch");
+        }
+    }
+
+    protected virtual void CheckUpdatedFlag()
     {
 
+    }
+
+    IEnumerator CoStartPunch()
+    {
+        Debug.Log("Monster Controller 펀치 시작");
+        State = CreatureState.Skill;
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Monster Controller 펀치 종료");
+        State = CreatureState.Idle;
+        _coSkill = null;
+        CheckUpdatedFlag();
     }
 
     protected override void UpdateIdle()
     {
-
-    }
-
-    void OnKeyboard()
-    {
-        //if (Input.GetKey(KeyCode.W))
+        //// 이동 상태로 갈지 확인
+        //if (Dir != MoveDir.None)
         //{
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
-        //    transform.position += Vector3.forward * Time.deltaTime * _speed;
-
+        //    State = State.Moving;
+        //    return;
         //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.2f);
-        //    transform.position += Vector3.back * Time.deltaTime * _speed;
 
-        //}
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.2f);
-        //    transform.position += Vector3.left * Time.deltaTime * _speed;
-
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.2f);
-        //    transform.position += Vector3.right * Time.deltaTime * _speed;
-
-        //}
-    }
-
-    void OnMouseClicked(Define.MouseEvent evt)
-    {
-        if (evt == Define.MouseEvent.Click)
-            return;
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
-
-
-        RaycastHit hit;
-        //int mask = (1 << 8);
-        if (Physics.Raycast(ray, out hit, 100.0f, LayerMask.GetMask("Ground")))
-        {
-            // TODO
-            // 특정 그리드에 몹이 배치되도록 설정
-        }
     }
 }

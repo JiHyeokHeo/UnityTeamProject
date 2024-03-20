@@ -21,7 +21,12 @@ public class Node
         _worldPosition = worldPos;
         _gridX = gridX;
         _gridY = gridY;
+    }
 
+    public Node(int gridX, int gridY)
+    {
+        _gridX = gridX;
+        _gridY = gridY;
     }
 
     public int FCost { get { return _gCost + _hCost; } }
@@ -53,19 +58,19 @@ public class MapManager
 
     void CreateGrid()
     {
-        _grid = new Node[_gridSizeX, _gridSizeY];
-        worldBottomLeft = Vector3.zero - Vector3.right * _gridWorldSizeX / 2 - Vector3.forward * _gridWorldSizeY / 2;
+            _grid = new Node[_gridSizeX, _gridSizeY];
+            worldBottomLeft = Vector3.zero - Vector3.right * _gridWorldSizeX / 2 - Vector3.forward * _gridWorldSizeY / 2;
 
-        for (int x = 0; x < _gridSizeX; x++)
-        {
-            for (int y = 0; y < _gridSizeY; y++)
+            for (int x = 0; x < _gridSizeX; x++)
             {
-                // 좌하단 끝점에서 중앙을 기준으로 지름만큼 움직이는 원리
-                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + _nodeRadius) + Vector3.forward * (y * _nodeDiameter + _nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkableMask));
-                _grid[x, y] = new Node(walkable, worldPoint, x, y); // 그리드 정보 담기
+                for (int y = 0; y < _gridSizeY; y++)
+                {
+                    // 좌하단 끝점에서 중앙을 기준으로 지름만큼 움직이는 원리
+                    Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + _nodeRadius) + Vector3.forward * (y * _nodeDiameter + _nodeRadius);
+                    //bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkableMask));
+                    _grid[x, y] = new Node(x, y); // 그리드 정보 담기
+                }
             }
-        }
     }
 
     //public bool CanGo(Vector3Int cellPos)
@@ -94,26 +99,20 @@ public class MapManager
         return false;
     }
 
+    int[] _dy = { 1, 0, -1, 0 };
+    int[] _dx = { 0, -1, 0, 1 };
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
 
-        // 상하좌우대각선 검색 3x3 8칸 검색
-        for (int x = -1; x <= 1; x++)
+        // 상하좌우 4칸으로 변경
+        for (int i = 0; i < 4; i++)
         {
-            for (int y = -1; y <= 1; y++)
-            {
-                // 자기 자신은 제외
-                if (x == 0 && y == 0)
-                    continue;
+            int checkX = node._gridX + _dx[i];
+            int checkY = node._gridY + _dy[i];
 
-                int checkX = node._gridX + x;
-                int checkY = node._gridY + y;
-
-                if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
-                    neighbours.Add(_grid[checkX, checkY]);
-
-            }
+            if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
+                neighbours.Add(_grid[checkX, checkY]);
         }
 
         return neighbours;

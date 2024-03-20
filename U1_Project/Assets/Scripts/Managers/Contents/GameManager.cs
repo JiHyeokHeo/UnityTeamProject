@@ -30,37 +30,37 @@ public class GameManager
         return obj;
     }
 
-    public Define.WorldObject GetWorldObjectType(GameObject obj)
-    {
-        BaseController bc = obj.GetComponent<BaseController>();
+    //public Define.WorldObject GetWorldObjectType(GameObject obj)
+    //{
+    //    BaseController bc = obj.GetComponent<BaseController>();
 
-        if (bc == null)
-            return Define.WorldObject.Unknown;
+    //    if (bc == null)
+    //        return Define.WorldObject.Unknown;
 
-        return bc.WorldObjectType;
-    }
+    //    return bc.WorldObjectType;
+    //}
 
-    public void DeSpawn(GameObject obj)
-    {
-        Define.WorldObject type = GetWorldObjectType(obj);
+    //public void DeSpawn(GameObject obj)
+    //{
+    //    //Define.WorldObject type = GetWorldObjectType(obj);
 
-        switch(type)
-        {
-            case Define.WorldObject.Monster:
-                {
-                    if(_monsters.Contains(obj))
-                        _monsters.Remove(obj);
-                }
-                break;
-            case Define.WorldObject.Player:
-                {
-                    if (_player == obj)
-                        _player = null;
-                }
-                break;
-        }
+    //    switch(type)
+    //    {
+    //        case Define.WorldObject.Monster:
+    //            {
+    //                if(_monsters.Contains(obj))
+    //                    _monsters.Remove(obj);
+    //            }
+    //            break;
+    //        case Define.WorldObject.Player:
+    //            {
+    //                if (_player == obj)
+    //                    _player = null;
+    //            }
+    //            break;
+    //    }
 
-        Managers.Resource.Destroy(obj);
-    }
+    //    Managers.Resource.Destroy(obj);
+    //}
 
 }

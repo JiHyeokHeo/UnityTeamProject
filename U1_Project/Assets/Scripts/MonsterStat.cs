@@ -10,8 +10,8 @@ public class MonsterStat : Stat
         
     }
 
-    protected override void OnDead(Stat attacker)
-    {
+    //protected override void OnDead(Stat attacker)
+    //{
         
-    }
+    //}
 }

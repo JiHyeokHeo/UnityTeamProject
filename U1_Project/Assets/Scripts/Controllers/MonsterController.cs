@@ -12,27 +12,6 @@ public class MonsterController : CreatureController
     protected override void Init()
     {
         base.Init();
-        //GameObject obj2 = GameObject.Find("Seeker");
-        //_gridMap.player = obj2.transform;
-        WorldObjectType = Define.WorldObject.Monster;
-    }
-
-    void Start()
-    {
-        Init();
-    }
-
-    protected override void UpdateController()
-    {
-        base.UpdateController();
-    }
-
-    public override void UseSkill(int skillId)
-    {
-        if (skillId == 1)
-        {
-            _coSkill = StartCoroutine("CoStartPunch");
-        }
     }
 
     protected virtual void CheckUpdatedFlag()
