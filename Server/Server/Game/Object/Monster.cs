@@ -16,7 +16,7 @@ namespace Server.Game
             Stat.Level = 1;
             Stat.Hp = 100;
             Stat.MaxHp = 100;
-            Stat.Speed = 20.0f;
+            Stat.Speed = 5.0f;
 
             State = CreatureState.Idle;
         }
@@ -71,7 +71,7 @@ namespace Server.Game
         {
             if (_nextMoveTick > Environment.TickCount64)
                 return;
-            int moveTick = (int)(1000 / Speed);
+            int moveTick = (int)(10000 / Speed);
             _nextMoveTick = Environment.TickCount64 + moveTick;
 
             if (_target == null || _target.Room != Room)
@@ -108,6 +108,7 @@ namespace Server.Game
             movePacket.ObjectId = Id;
             movePacket.PosInfo = PosInfo;
             Room.Broadcast(movePacket);
+
         }
 
         protected virtual void UpdateSkill()

@@ -68,7 +68,7 @@ public abstract class BaseController : MonoBehaviour
 
         set
         {
-            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y && PosInfo.PosZ == value.z)
+            if (PosInfo.PosX == value.x && PosInfo.PosZ == value.z)
                 return;
 
             PosInfo.PosX = value.x;
@@ -106,7 +106,6 @@ public abstract class BaseController : MonoBehaviour
                 return;
 
             PosInfo.State = value;
-            Animator anim = GetComponent<Animator>();
             UpdateAnimation();
             _updated = true;
         }

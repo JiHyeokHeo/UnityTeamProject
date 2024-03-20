@@ -98,6 +98,7 @@ namespace Server.Game.Room
         // 지름
         public float _nodeDiameter;
         public int _gridSizeX, _gridSizeY;
+        Vector3Int worldBottomLeft;
 
         public bool[,] _collision;
         GameObject[,] _objects;
@@ -109,7 +110,7 @@ namespace Server.Game.Room
             if (cellPos.z < 0 || cellPos.z >= _gridSizeY)
                 return false;
 
-            return !_collision[cellPos.x, cellPos.z] || (!checkObjects || _objects[cellPos.x, cellPos.z] == null);
+            return !_collision[cellPos.x, cellPos.z] && (!checkObjects || _objects[cellPos.x, cellPos.z] == null);
         }
 
         public GameObject Find(Vector3Int cellPos)
@@ -119,7 +120,7 @@ namespace Server.Game.Room
             if (cellPos.z < 0 || cellPos.z > _gridSizeY)
                 return null;
 
-            return _objects[cellPos.x, cellPos.y];
+            return _objects[cellPos.x, cellPos.z];
         }
 
         public bool ApplyLeave(GameObject gameObject)
@@ -131,8 +132,8 @@ namespace Server.Game.Room
                 return false;
 
             {
-                if (_objects[posInfo.PosX, posInfo.PosY] == gameObject)
-                    _objects[posInfo.PosX, posInfo.PosY] = null;
+                if (_objects[posInfo.PosX, posInfo.PosZ] == gameObject)
+                    _objects[posInfo.PosX, posInfo.PosZ] = null;
             }
 
             return true;
@@ -147,7 +148,7 @@ namespace Server.Game.Room
                 return false;
 
             {
-                _objects[dest.x, dest.y] = gameObject;
+                _objects[dest.x, dest.z] = gameObject;
             }
 
             // 실제 좌표이동
@@ -172,9 +173,10 @@ namespace Server.Game.Room
             _objects = new GameObject[_gridSizeX, _gridSizeY];
             // 임시 땜방
             _gridWorldSizeX = 100.0f;
-            _gridWorldSizeY = 90.0f;
+            _gridWorldSizeY = 100.0f;
             _nodeRadius = 5.0f;
             _nodeDiameter = 10.0f;
+            worldBottomLeft = Vector3Int.zero - Vector3Int.right * _gridWorldSizeX / 2 - Vector3Int.up * _gridWorldSizeY / 2;
             // 
 
             for (int y = 0; y < _gridSizeY; y++)
@@ -229,16 +231,22 @@ namespace Server.Game.Room
             return _grid[x, y];
         }
 
-        public Node NodeFromCellPos(Vector3Int cellPos)
+        Vector3Int cellPosToWorld(Vector3Int cellPos)
         {
-            return _grid[cellPos.x, cellPos.z];
+            return new Vector3Int(
+                (int)_nodeRadius + worldBottomLeft.x + (cellPos.x * (int)_nodeDiameter),
+                cellPos.y,
+                (int)_nodeRadius + worldBottomLeft.z + (cellPos.z * (int)_nodeDiameter));
         }
 
         #region Astar 길찾기
-        public List<Node> FindPath(Vector3Int startPos, Vector3Int targetPos, bool checkObjects = true)
+        public List<Node> FindPath(Vector3Int startCellPos, Vector3Int targetCellPos, bool checkObjects = true)
         {
-            Node startNode = NodeFromCellPos(startPos);
-            Node targetNode = NodeFromCellPos(targetPos);
+            Vector3Int startWorldPos = cellPosToWorld(startCellPos);
+            Vector3Int targetWorldPos = cellPosToWorld(targetCellPos);
+
+            Node startNode = NodeFromWorldPoint(startWorldPos);
+            Node targetNode = NodeFromWorldPoint(targetWorldPos);
 
             List<Node> openSet = new List<Node>();
 
@@ -263,24 +271,26 @@ namespace Server.Game.Room
                 // 도착하면 리턴
                 if (currentNode == targetNode)
                 {
-                    return RetracePath(startNode, targetNode);
+                    break;
                 }
 
                 List<Node> nodeNeigbours = GetNeighbours(currentNode);
                 foreach (Node neighbour in nodeNeigbours)
                 {
-                    Vector3Int nextPos = new Vector3Int(neighbour._gridX, startPos.y, neighbour._gridY);
-
-                    if (CanGo(nextPos, checkObjects) == false)
-                        continue;
-
                     if (closedSet.Contains(neighbour))
                         continue;
 
                     // 현재 노드에서 자기 주변 노드로의 거리
-                    int newMovementCostToNeighbour = currentNode._gCost + GetDistance(currentNode, neighbour);
+                    int newMovementCostToNeighbour = currentNode._gCost + GetDistance(currentNode, targetNode);
                     if (newMovementCostToNeighbour < neighbour._gCost || !openSet.Contains(neighbour))
                     {
+                        Vector3Int next = new Vector3Int(neighbour._gridX, startCellPos.y, neighbour._gridY);
+                        if (next.x != neighbour._gridX || next.y != neighbour._gridY)
+                        {
+                            if (CanGo(next, checkObjects) == false)
+                                break;
+                        }
+
                         neighbour._gCost = newMovementCostToNeighbour;
                         neighbour._hCost = GetDistance(neighbour, targetNode);
                         neighbour._parent = currentNode;
@@ -296,7 +306,7 @@ namespace Server.Game.Room
         List<Node> RetracePath(Node startNode, Node endNode)
         {
             List<Node> path = new List<Node>();
-            Node currentNode = endNode;
+            Node currentNode = endNode._parent;
 
             while (currentNode != startNode)
             {

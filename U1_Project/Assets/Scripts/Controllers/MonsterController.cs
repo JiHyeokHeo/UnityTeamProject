@@ -12,8 +12,15 @@ public class MonsterController : CreatureController
     protected override void Init()
     {
         base.Init();
+
+        State = CreatureState.Idle;
+        Dir = MoveDir.Down;
     }
 
+    protected override void UpdateIdle()
+    {
+        base.UpdateIdle();
+    }
     protected virtual void CheckUpdatedFlag()
     {
 
@@ -29,15 +36,5 @@ public class MonsterController : CreatureController
         _coSkill = null;
         CheckUpdatedFlag();
     }
-
-    protected override void UpdateIdle()
-    {
-        //// 이동 상태로 갈지 확인
-        //if (Dir != MoveDir.None)
-        //{
-        //    State = State.Moving;
-        //    return;
-        //}
-
-    }
+    
 }

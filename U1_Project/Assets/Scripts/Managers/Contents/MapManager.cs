@@ -58,19 +58,19 @@ public class MapManager
 
     void CreateGrid()
     {
-            _grid = new Node[_gridSizeX, _gridSizeY];
-            worldBottomLeft = Vector3.zero - Vector3.right * _gridWorldSizeX / 2 - Vector3.forward * _gridWorldSizeY / 2;
+        _grid = new Node[_gridSizeX, _gridSizeY];
+        worldBottomLeft = Vector3.zero - Vector3.right * _gridWorldSizeX / 2 - Vector3.forward * _gridWorldSizeY / 2;
 
-            for (int x = 0; x < _gridSizeX; x++)
+        for (int x = 0; x < _gridSizeX; x++)
+        {
+            for (int y = 0; y < _gridSizeY; y++)
             {
-                for (int y = 0; y < _gridSizeY; y++)
-                {
-                    // 좌하단 끝점에서 중앙을 기준으로 지름만큼 움직이는 원리
-                    Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + _nodeRadius) + Vector3.forward * (y * _nodeDiameter + _nodeRadius);
-                    //bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkableMask));
-                    _grid[x, y] = new Node(x, y); // 그리드 정보 담기
-                }
+                // 좌하단 끝점에서 중앙을 기준으로 지름만큼 움직이는 원리
+                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + _nodeRadius) + Vector3.forward * (y * _nodeDiameter + _nodeRadius);
+                //bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkableMask));
+                _grid[x, y] = new Node(x, y); // 그리드 정보 담기
             }
+        }
     }
 
     //public bool CanGo(Vector3Int cellPos)
