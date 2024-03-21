@@ -76,15 +76,13 @@ namespace Server.Game
                             if (player != p)
                                 spawnPacket.Objects.Add(p.Info);
                         }
-                        player.Session.Send(spawnPacket);
+                        
                         foreach (Monster m in _monsters.Values)
-                        {
                             spawnPacket.Objects.Add(m.Info);
-                        }
+
                         foreach (Projectile p in _projectiles.Values)
-                        {
                             spawnPacket.Objects.Add(p.Info);
-                        }
+
                         player.Session.Send(spawnPacket);
                     }
                 }

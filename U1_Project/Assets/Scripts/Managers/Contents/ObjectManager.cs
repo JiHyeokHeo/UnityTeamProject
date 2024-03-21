@@ -91,7 +91,7 @@ public class ObjectManager
 	{
 		foreach (GameObject obj in _objects.Values)
 		{
-			BaseController bc = obj.GetComponent<BaseController>();
+            CreatureController bc = obj.GetComponent<CreatureController>();
 			if (bc == null)
 				continue;
 
