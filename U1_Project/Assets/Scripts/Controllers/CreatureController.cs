@@ -57,4 +57,8 @@ public class CreatureController : BaseController
         State = CreatureState.Dead;
 
     }
+    public virtual void UseSkill(int skillId)
+    {
+
+    }
 }

@@ -1,4 +1,5 @@
 using Google.Protobuf.Protocol;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,20 +22,19 @@ public class MonsterController : CreatureController
     {
         base.UpdateIdle();
     }
-    protected virtual void CheckUpdatedFlag()
-    {
 
+    public override void OnDamaged()
+    {
+        
     }
 
-    IEnumerator CoStartPunch()
+    public override void UseSkill(int skillId)
     {
-        Debug.Log("Monster Controller ÆÝÄ¡ ½ÃÀÛ");
-        State = CreatureState.Skill;
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("Monster Controller ÆÝÄ¡ Á¾·á");
-        State = CreatureState.Idle;
-        _coSkill = null;
-        CheckUpdatedFlag();
+        if (skillId == 1)
+        {
+            State = CreatureState.Skill;
+            Debug.Log("Monster Punch");
+        }
     }
-    
+
 }

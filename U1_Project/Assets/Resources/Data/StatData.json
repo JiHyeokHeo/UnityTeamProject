@@ -7,7 +7,7 @@
       "maxmp": "50",
       "attack": "10",
       "attackRange": "5",
-      "speed": "10.0"
+      "speed": "10"
     },
     {
       "name": "Rio",
@@ -16,7 +16,7 @@
       "maxmp": "100",
       "attack": "10",
       "attackRange": "5",
-      "speed": "10.0"
+      "speed": "10"
     },
     {
       "name": "Rio",
@@ -25,7 +25,7 @@
       "maxmp": "150",
       "attack": "10",
       "attackRange": "5",
-      "speed" : "10.0"
+      "speed" : "10"
     }
   ]
 }

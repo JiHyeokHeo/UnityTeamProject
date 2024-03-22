@@ -22,10 +22,16 @@ namespace Server.Game
         public PositionInfo PosInfo { get; private set; } = new PositionInfo();
         public StatInfo Stat { get; private set; } = new StatInfo();
 
-        public float Speed
+        public int Speed
         {
             get { return Stat.Speed; }
             set { Stat.Speed = value; }
+        }
+
+        public int Hp
+        {
+            get { return Stat.Hp; }
+            set { Stat.Hp = Math.Clamp(value, 0, Stat.MaxHp); }
         }
 
         public MoveDir Dir

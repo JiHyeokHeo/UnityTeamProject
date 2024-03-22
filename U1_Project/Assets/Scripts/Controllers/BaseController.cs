@@ -30,7 +30,7 @@ public abstract class BaseController : MonoBehaviour
             Stat.Hp = value;
         }
     }
-    public float Speed
+    public int Speed
     {
         get { return Stat.Speed;}
         set { Stat.Speed = value;}
@@ -177,8 +177,6 @@ public abstract class BaseController : MonoBehaviour
     protected virtual void UpdateIdle() { }
 
     protected virtual void UpdateDie() { }
-
-    public virtual void UseSkill(int skillId) { }
 
     protected virtual void UpdateMoving()
     {

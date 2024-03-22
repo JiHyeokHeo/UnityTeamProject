@@ -50,7 +50,7 @@ namespace Server.Data
     public class ProjectileInfo
     {
         public string name;
-        public float speed;
+        public int speed;
         public int range;
         public string prefab;
     }

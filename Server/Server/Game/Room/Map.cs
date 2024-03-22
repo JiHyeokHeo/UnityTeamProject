@@ -284,12 +284,12 @@ namespace Server.Game.Room
                     int newMovementCostToNeighbour = currentNode._gCost + GetDistance(currentNode, targetNode);
                     if (newMovementCostToNeighbour < neighbour._gCost || !openSet.Contains(neighbour))
                     {
-                        Vector3Int next = new Vector3Int(neighbour._gridX, startCellPos.y, neighbour._gridY);
-                        if (next.x != neighbour._gridX || next.y != neighbour._gridY)
-                        {
-                            if (CanGo(next, checkObjects) == false)
-                                break;
-                        }
+                        //Vector3Int next = new Vector3Int(neighbour._gridX, startCellPos.y, neighbour._gridY);
+                        //if (next.x != neighbour._gridX || next.y != neighbour._gridY)
+                        //{
+                        //    if (CanGo(next, checkObjects) == false)
+                        //        break;
+                        //}
 
                         neighbour._gCost = newMovementCostToNeighbour;
                         neighbour._hCost = GetDistance(neighbour, targetNode);
@@ -306,7 +306,7 @@ namespace Server.Game.Room
         List<Node> RetracePath(Node startNode, Node endNode)
         {
             List<Node> path = new List<Node>();
-            Node currentNode = endNode._parent;
+            Node currentNode = endNode;
 
             while (currentNode != startNode)
             {
