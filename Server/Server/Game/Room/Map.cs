@@ -125,6 +125,11 @@ namespace Server.Game.Room
 
         public bool ApplyLeave(GameObject gameObject)
         {
+            if (gameObject.Room == null)
+                return false;;
+            if (gameObject.Room.Map != this)
+                return false;
+
             PositionInfo posInfo = gameObject.PosInfo;
             if (posInfo.PosX < 0 || posInfo.PosX > _gridSizeX)
                 return false;
@@ -142,6 +147,11 @@ namespace Server.Game.Room
         public bool ApplyMove(GameObject gameObject, Vector3Int dest)
         {
             ApplyLeave(gameObject);
+
+            if (gameObject.Room == null)
+                return false; ;
+            if (gameObject.Room.Map != this)
+                return false;
 
             PositionInfo posInfo = gameObject.PosInfo;
             if (CanGo(dest, true) == false)
