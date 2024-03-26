@@ -134,7 +134,7 @@ namespace Server.Game
             Room.Broadcast(diePacket);
 
             GameRoom room = Room;
-            Room.LeaveGame(Id);
+            room.LeaveGame(Id);
 
             Stat.Hp = Stat.MaxMp;
             PosInfo.State = CreatureState.Idle;
@@ -143,8 +143,12 @@ namespace Server.Game
             PosInfo.PosY = 0;
             PosInfo.PosZ = 0;
 
+            Action action = () =>
+            {
+                
+            };
+
             room.EnterGame(this);
         }
-
     }
 }

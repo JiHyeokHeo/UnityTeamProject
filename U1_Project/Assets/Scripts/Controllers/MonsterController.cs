@@ -14,8 +14,7 @@ public class MonsterController : CreatureController
     {
         base.Init();
 
-        State = CreatureState.Idle;
-        Dir = MoveDir.Down;
+     
     }
 
     protected override void UpdateIdle()
