@@ -1,13 +1,9 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Server.Data;
-using Server.Game;
 using Server.Game.Room;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-using System.Threading;
 
 namespace Server.Game
 {
@@ -28,8 +24,17 @@ namespace Server.Game
             Monster monster = ObjectManager.Instance.Add<Monster>();
             monster.CellPos = new Vector3Int(5, 0, 5);
             EnterGame(monster);
+
+            //TestTimer();
         }
 
+
+        void TestTimer()
+        {
+            Console.WriteLine("Test Timer");
+            PushAfter(100, TestTimer);
+        }
+        // MMO (50ms)
         public void Update()
         {
             foreach (Monster monster in _monsters.Values)
@@ -41,6 +46,8 @@ namespace Server.Game
             {
                 projectile.Update();
             }
+
+            Flush();
         }
 
         public void EnterGame(GameObject gameObject)
