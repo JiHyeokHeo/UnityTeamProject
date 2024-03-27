@@ -11,6 +11,7 @@ public class LoginScene : BaseScene
 
         SceneType = Define.Scene.Login;
 
+        Managers.Resource.Instantiate("Test");
     }
 
     private void Update()
@@ -25,5 +26,6 @@ public class LoginScene : BaseScene
     {
         Debug.Log("LoginScene Clear!");
     }
+    
 
 }

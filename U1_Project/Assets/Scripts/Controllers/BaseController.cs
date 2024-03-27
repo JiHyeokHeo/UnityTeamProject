@@ -132,6 +132,7 @@ public abstract class BaseController : MonoBehaviour
 
     protected virtual void UpdateAnimation()
     {
+
         if (State == CreatureState.Idle)
         {
             switch (Dir)
