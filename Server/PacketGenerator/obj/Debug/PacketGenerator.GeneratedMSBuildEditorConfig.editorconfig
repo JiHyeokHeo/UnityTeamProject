@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = PacketGenerator
-build_property.ProjectDir = C:\Unity\UnityTeamProject\Server\PacketGenerator\
+build_property.ProjectDir = C:\Project\UnityTeamProject\Server\PacketGenerator\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

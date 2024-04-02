@@ -10,8 +10,8 @@ public class MyPlayerController : PlayerController
     protected override void Init()
     {
         base.Init();
-        Managers.Input.KeyAction -= GetDirOrder;
-        Managers.Input.KeyAction += GetDirOrder;
+        //Managers.Input.MouseAction -= GetDirOrder;
+        //Managers.Input.MouseAction += GetDirOrder;
     }
 
     protected override void UpdateController()

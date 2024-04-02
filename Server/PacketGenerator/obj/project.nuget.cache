@@ -1,18 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "EKKPYk5aGD7a44vggcxVCJoLjLa0qa45kSBCyPh9Dlr+LpKtmQBoZzHDjabayNAbkoqqx/0BmB1Knu5PWZel5g==",
+  "dgSpecHash": "HIRv9ydDkCGyEGxXAZwRYnzsII+vt/lFn6u9gGgtR2fMxwmIwf4KgxiXi5dBowbIoPjhGdqNyc4GPPvHE8HesA==",
   "success": true,
-  "projectFilePath": "C:\\Unity\\UnityTeamProject\\Server\\PacketGenerator\\PacketGenerator.csproj",
+  "projectFilePath": "C:\\Project\\UnityTeamProject\\Server\\PacketGenerator\\PacketGenerator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\google.protobuf\\3.26.0\\google.protobuf.3.26.0.nupkg.sha512",
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+    "C:\\Users\\HEOJIHYEOK\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
