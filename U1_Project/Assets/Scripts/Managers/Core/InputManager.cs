@@ -19,7 +19,7 @@ public class InputManager
         if (Input.anyKey && KeyAction != null)
             KeyAction.Invoke();
 
-        if(MouseAction != null)
+        if (MouseAction != null)
         {
             if (Input.GetMouseButton(0))
             {

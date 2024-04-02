@@ -24,6 +24,7 @@ public class CreatureController : BaseController
     {
         GameObject go = Managers.Resource.Instantiate("UI/HpBar", transform);
         go.transform.localPosition = new Vector3(0, 1.3f, 0);
+        go.transform.rotation = Camera.main.transform.rotation;
         go.name = "HpBar";
         _hpBar = go.GetComponent<HpBar>();
         UpdateHpBar();

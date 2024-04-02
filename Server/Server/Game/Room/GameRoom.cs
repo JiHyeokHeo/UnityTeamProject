@@ -183,8 +183,8 @@ namespace Server.Game
             // 다른 좌표로 이동할 경우, 갈 수 있는지 체크
             if (movePosInfo.PosX != info.PosInfo.PosX || movePosInfo.PosZ != info.PosInfo.PosZ)
             {
-                if (Map.CanGo(new Vector3Int(movePosInfo.PosX, movePosInfo.PosY, movePosInfo.PosZ)) == false)
-                    return;
+                //if (Map.CanGo(new Vector3Int(movePosInfo.PosX, movePosInfo.PosY, movePosInfo.PosZ)) == false)
+                //    return;
             }
 
             info.PosInfo.State = movePosInfo.State;
@@ -197,7 +197,6 @@ namespace Server.Game
             resMovePacket.PosInfo = movePacket.PosInfo;
 
             Broadcast(resMovePacket);
-
         }
 
         public void HandleSkill(Player player, C_Skill skillPacket)

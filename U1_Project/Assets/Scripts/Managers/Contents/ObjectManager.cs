@@ -24,7 +24,7 @@ public class ObjectManager
 		{
             if (myPlayer)
             {
-                GameObject go = Managers.Resource.Instantiate("Creature/MyPlayer");
+                GameObject go = Managers.Resource.Instantiate("Creature/project_-jax");
                 go.name = info.Name;
                 _objects.Add(info.ObjectId, go);
 

@@ -78,7 +78,7 @@ public abstract class BaseController : MonoBehaviour
         }
     }
 
-    public MoveDir Dir
+    public virtual MoveDir Dir
     {
         get { return PosInfo.MoveDir; }
         set
@@ -89,7 +89,7 @@ public abstract class BaseController : MonoBehaviour
             PosInfo.MoveDir = value;
 
             // TODO 
-            // UpdateAnimation();
+             UpdateAnimation();
             _updated = true;
         }
     }
@@ -133,28 +133,20 @@ public abstract class BaseController : MonoBehaviour
     protected virtual void UpdateAnimation()
     {
 
-        if (State == CreatureState.Idle)
+        switch (State)
         {
-            switch (Dir)
-            {
-                case MoveDir.Up:
-                    //_animator.Play();
-                    //_animator.CrossFade("", 0.1f);
-                    break;
-                case MoveDir.Down:
-                    break;
-                case MoveDir.Left:
-                    break;
-                case MoveDir.Right:
-                    break;
+            case CreatureState.Idle:
+                _animator.CrossFade("IDLE", 0.1f);
+                break;
+            case CreatureState.Moving:
+                _animator.CrossFade("MOVE", 0.1f);
+                break;
+            case CreatureState.Dead:
+                break;
+            case CreatureState.Skill:
+                break;
+        }
 
-            }
-        }
-        else if(State == CreatureState.Moving)
-        {
-            // TODO
-            // 움직이는거 추가
-        }
     }
 
     protected virtual void UpdateController()

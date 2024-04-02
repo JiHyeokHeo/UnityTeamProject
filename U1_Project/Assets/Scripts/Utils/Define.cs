@@ -47,4 +47,9 @@ public class Define
         QuarterView,
         End,
     }
+
+    public enum Layer
+    {
+        Ground = 8,
+    }
 }
