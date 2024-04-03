@@ -31,8 +31,9 @@ public class ObjectManager
                 MyPlayer = go.GetComponent<MyPlayerController>();
                 MyPlayer.Id = info.ObjectId;
                 MyPlayer.PosInfo = info.PosInfo;
+				MyPlayer.WorldPosInfo = info.WorldPosInfo;
 				MyPlayer.Stat = info.StatInfo;
-                MyPlayer.SyncPos();
+                MyPlayer.SyncWorldPos();
             }
             else
             {
@@ -43,8 +44,9 @@ public class ObjectManager
                 PlayerController pc = go.GetComponent<PlayerController>();
                 pc.Id = info.ObjectId;
                 pc.PosInfo = info.PosInfo;
+				pc.WorldPosInfo = info.WorldPosInfo;
                 pc.Stat = info.StatInfo;
-                pc.SyncPos();
+                pc.SyncWorldPos();
             }
         }
 		else if (_objectType == GameObjectType.Monster)

@@ -12,10 +12,26 @@ class PacketHandler
 {
 	public static void C_MoveHandler(PacketSession session, IMessage packet)
 	{
-		C_Move movePacket = packet as C_Move;
-		ClientSession clientSession = session as ClientSession;
+		//C_Move movePacket = packet as C_Move;
+		//ClientSession clientSession = session as ClientSession;
 
-        Console.WriteLine($"C_Move ( {clientSession.SessionId}, {movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY} , {movePacket.PosInfo.PosZ}");
+	//   Console.WriteLine($"C_Move ( {clientSession.SessionId}, {movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY} , {movePacket.PosInfo.PosZ}");
+
+		//Player player = clientSession.MyPlayer;
+		//if (player == null)
+		//	return;
+
+		//GameRoom room = player.Room;
+		//if (room == null)
+		//	return;
+
+		//room.Push(room.HandleMove, player, movePacket);
+    }
+
+	public static void C_WorldMoveHandler(PacketSession session, IMessage packet)
+	{
+		C_WorldMove worldMovePacket = packet as C_WorldMove;
+		ClientSession clientSession = session as ClientSession;
 
 		Player player = clientSession.MyPlayer;
 		if (player == null)
@@ -25,7 +41,7 @@ class PacketHandler
 		if (room == null)
 			return;
 
-		room.Push(room.HandleMove, player, movePacket);
+		room.Push(room.HandleMove, player, worldMovePacket);
     }
 
 	public static void C_SkillHandler(PacketSession session, IMessage packet)

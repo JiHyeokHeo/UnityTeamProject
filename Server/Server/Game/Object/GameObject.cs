@@ -20,6 +20,8 @@ namespace Server.Game
 
         public ObjectInfo Info { get; set; } = new ObjectInfo();
         public PositionInfo PosInfo { get; private set; } = new PositionInfo();
+
+        public WorldPosInfo WorldPosInfo { get; private set; } = new WorldPosInfo();
         public StatInfo Stat { get; private set; } = new StatInfo();
 
         public int Speed
@@ -50,6 +52,7 @@ namespace Server.Game
         {
             Info.PosInfo = PosInfo;
             Info.StatInfo = Stat;
+            Info.WorldPosInfo = WorldPosInfo;
         }
 
         public virtual void Update()

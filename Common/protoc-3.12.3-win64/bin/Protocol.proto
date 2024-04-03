@@ -15,6 +15,8 @@ enum MsgId {
   S_SKILL = 7;
   S_CHANGE_HP = 8;
   S_DIE = 9;
+  C_WORLD_MOVE = 10;
+  S_WORLD_MOVE = 11;
 }
 
 enum CreatureState {
@@ -68,6 +70,15 @@ message S_Move {
   PositionInfo posInfo = 2;
 }
 
+message C_WorldMove {
+  WorldPosInfo worldPosInfo  = 1;
+}
+
+message S_WorldMove {
+  int32 objectId = 1;
+  WorldPosInfo worldPosInfo = 2;
+}
+
 message C_Skill {
   SkillInfo info = 1;
 }
@@ -91,7 +102,18 @@ message ObjectInfo {
   int32 objectId = 1;
   string name = 2;
   PositionInfo posInfo = 3;
-  StatInfo statInfo = 4;
+  WorldPosInfo worldPosInfo = 4;
+  StatInfo statInfo = 5;
+}
+
+message WorldPosInfo {
+ float posX = 1;
+ float posY = 2;
+ float posZ = 3;
+ float rotX = 4;
+ float rotY = 5;
+ float rotZ = 6;
+ CreatureState state = 7;
 }
 
 message PositionInfo {

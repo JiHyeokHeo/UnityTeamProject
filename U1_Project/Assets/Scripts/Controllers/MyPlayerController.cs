@@ -13,8 +13,8 @@ public class MyPlayerController : PlayerController
     protected override void Init()
     {
         base.Init();
-        Managers.Input.MouseAction -= GetDirOrder;
-        Managers.Input.MouseAction += GetDirOrder;
+        Managers.Input.MouseAction -= OnMouseEvent;
+        Managers.Input.MouseAction += OnMouseEvent;
     }
 
     protected override void UpdateController()
@@ -24,10 +24,8 @@ public class MyPlayerController : PlayerController
             case CreatureState.Dead:
                 break;
             case CreatureState.Moving:
-                GetDirOrder();
                 break;
             case CreatureState.Idle:
-                GetDirOrder();
                 break;
         }
 
@@ -36,20 +34,22 @@ public class MyPlayerController : PlayerController
 
     protected override void UpdateMoving()
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool raycastHit = Physics.Raycast(ray, out hit, 100.0f, _layerMask);
-
-        if (raycastHit)
+        Vector3 dir = _destPos - transform.position;
+        dir.y = 0;
+        if (dir.magnitude < 0.01f)
         {
-            _destPos = hit.point;
-            State = CreatureState.Moving;
+            State = CreatureState.Idle;
+            return;
         }
         else
         {
-
+            // 플레이어 이동속도 하드코딩
+            float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
+            transform.position += dir.normalized * moveDist;
+            WorldPos = transform.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+            WorldRotation = transform.rotation;
         }
-
     }
 
     protected override void UpdateIdle()
@@ -81,45 +81,40 @@ public class MyPlayerController : PlayerController
     }
 
 
-    void GetDirOrder(Define.MouseEvent evt)
+    void OnMouseEvent(Define.MouseEvent evt)
     {
         _moveKeyPressed = true;
 
+        switch (State)
+        {
+            case CreatureState.Idle:
+                OnMouseEvent_IdleRun(evt);
+                break;
+            case CreatureState.Moving:
+                OnMouseEvent_IdleRun(evt);
+                break;
+        }
+    }
+
+    void OnMouseEvent_IdleRun(Define.MouseEvent evt)
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool raycastHit = Physics.Raycast(ray, out hit, 100.0f, _layerMask);
+
         switch (evt)
         {
-
+            case Define.MouseEvent.Click:
+                if (raycastHit)
+                {
+                    _destPos = hit.point;
+                    State = CreatureState.Moving;
+                }
+                break;
         }
-
-        if (Input.GetMouseButton(0))
-        {
-        }
-        else
-        {
-            _moveKeyPressed = false;
-        }
-            //// 싸울 타겟을 지정해야함
-            //if (Input.GetKey(KeyCode.W))
-            //{
-            //    Dir = MoveDir.Up;
-            //}
-            //else if (Input.GetKey(KeyCode.A))
-            //{
-            //    Dir = MoveDir.Left;
-            //}
-            //else if (Input.GetKey(KeyCode.S))
-            //{
-            //    Dir = MoveDir.Down;
-            //}
-            //else if (Input.GetKey(KeyCode.D))
-            //{
-            //    Dir = MoveDir.Right;
-            //}
-            //else
-            //{
-            //    _moveKeyPressed = false;
-            //}
-        }
-
+        CheckUpdatedFlag();
+    }
+    
     protected override void MoveToNextPos()
     {
         if (_moveKeyPressed == false)
@@ -129,39 +124,15 @@ public class MyPlayerController : PlayerController
             return;
         }
 
-        Vector3Int destPos = CellPos;
-
-        //switch (Dir)
-        //{
-        //    case MoveDir.Up:
-        //        destPos += new Vector3Int(0, 0, 1);
-        //        break;
-        //    case MoveDir.Left:
-        //        destPos += Vector3Int.left;
-        //        break;
-        //    case MoveDir.Right:
-        //        destPos += Vector3Int.right;
-        //        break;
-        //    case MoveDir.Down:
-        //        destPos += new Vector3Int(0, 0, -1);
-        //        break;
-        //}
-
-        if (Managers.Object.FindCreature(destPos) == null)
-        {
-            CellPos = destPos;
-        }
-
         CheckUpdatedFlag();
-
     }
 
     protected override void CheckUpdatedFlag()
     {
         if (_updated)
         {
-            C_Move movePacket = new C_Move();
-            movePacket.PosInfo = PosInfo;
+            C_WorldMove movePacket = new C_WorldMove();
+            movePacket.WorldPosInfo = WorldPosInfo;
             Managers.Network.Send(movePacket);
             //Debug.Log("Test");
             _updated = false;

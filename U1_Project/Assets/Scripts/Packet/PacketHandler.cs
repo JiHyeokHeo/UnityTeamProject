@@ -58,6 +58,24 @@ class PacketHandler
         bc.PosInfo = movePacket.PosInfo;
     }
 
+    public static void S_WorldMoveHandler(PacketSession session, IMessage packet)
+    {
+        S_WorldMove movePacket = packet as S_WorldMove;
+
+        GameObject go = Managers.Object.FindById(movePacket.ObjectId);
+        if (go == null)
+            return;
+
+        if (Managers.Object.MyPlayer.Id == movePacket.ObjectId)
+            return;
+
+        BaseController bc = go.GetComponent<BaseController>();
+        if (bc == null)
+            return;
+
+        bc.WorldPosInfo = movePacket.WorldPosInfo;
+    }
+
     public static void S_SkillHandler(PacketSession session, IMessage packet)
     {
         S_Skill skillPacket = packet as S_Skill;

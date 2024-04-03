@@ -22,6 +22,11 @@ public class PlayerController : CreatureController
         base.UpdateController();
     }
 
+    protected override void UpdateMoving()
+    {
+        transform.position = WorldPos;
+        transform.rotation = WorldRotation;
+    }
     public override void UseSkill(int skillId)
     {
         if (skillId == 1)

@@ -53,6 +53,61 @@ public abstract class BaseController : MonoBehaviour
         }
     }
 
+    public Vector3 WorldPos
+    {
+        get
+        {
+            return new Vector3(WorldPosInfo.PosX, WorldPosInfo.PosY, WorldPosInfo.PosZ);
+        }
+        set
+        {
+            if (WorldPosInfo.PosX == value.x && WorldPosInfo.PosZ == value.z)
+                return;
+
+            WorldPosInfo.PosX = value.x;
+            WorldPosInfo.PosY = value.y;
+            WorldPosInfo.PosZ = value.z;
+            _updated = true;
+        }
+    }
+
+    public Quaternion WorldRotation
+    {
+        get
+        {
+            return new Quaternion(WorldPosInfo.RotX, WorldPosInfo.RotY, WorldPosInfo.RotZ, 1);
+        }
+        set
+        {
+            if (WorldPosInfo.RotX == value.x && WorldPosInfo.RotZ == value.z)
+                return;
+
+            WorldPosInfo.RotX = value.x;
+            WorldPosInfo.RotY = value.y;
+            WorldPosInfo.RotZ = value.z;
+            _updated = true;
+        }
+    }
+
+    WorldPosInfo _worldPosInfo = new WorldPosInfo();
+    public WorldPosInfo WorldPosInfo
+    {
+        get { return _worldPosInfo; }
+        set
+        {
+            if (_worldPosInfo.Equals(value))
+                return;
+
+            WorldPos = new Vector3 (value.PosX, value.PosY, value.PosZ);
+            State = value.State;
+            WorldRotation = new Quaternion (value.RotX, value.RotY, value.RotZ, 1); ;
+        }
+    }
+
+    public void SyncWorldPos()
+    {
+        transform.position = WorldPos;
+    }
     public void SyncPos()
     {
         Vector3 destPos = Managers.Map.CellPosToWorldPoint(CellPos);
@@ -106,6 +161,7 @@ public abstract class BaseController : MonoBehaviour
                 return;
 
             PosInfo.State = value;
+            WorldPosInfo.State = value;
             UpdateAnimation();
             _updated = true;
         }
@@ -136,7 +192,7 @@ public abstract class BaseController : MonoBehaviour
         switch (State)
         {
             case CreatureState.Idle:
-                _animator.CrossFade("IDLE", 0.1f);
+                //_animator.CrossFade("IDLE", 0.1f);
                 break;
             case CreatureState.Moving:
                 _animator.CrossFade("MOVE", 0.1f);

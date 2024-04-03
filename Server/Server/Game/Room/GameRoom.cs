@@ -21,9 +21,9 @@ namespace Server.Game
         {
             Map.LoadMap(mapId);
 
-            Monster monster = ObjectManager.Instance.Add<Monster>();
-            monster.CellPos = new Vector3Int(5, 0, 5);
-            EnterGame(monster);
+            //Monster monster = ObjectManager.Instance.Add<Monster>();
+            //monster.CellPos = new Vector3Int(5, 0, 5);
+            //EnterGame(monster);
 
             //TestTimer();
         }
@@ -170,14 +170,14 @@ namespace Server.Game
 
         }
 
-        public void HandleMove(Player player, C_Move movePacket)
+        public void HandleMove(Player player, C_WorldMove movePacket)
         {
             if (player == null)
                 return;
 
 
             // TODO : 검증
-            PositionInfo movePosInfo = movePacket.PosInfo;
+            WorldPosInfo movePosInfo = movePacket.WorldPosInfo;
             ObjectInfo info = player.Info;
 
             // 다른 좌표로 이동할 경우, 갈 수 있는지 체크
@@ -187,14 +187,16 @@ namespace Server.Game
                 //    return;
             }
 
-            info.PosInfo.State = movePosInfo.State;
-            info.PosInfo.MoveDir = movePosInfo.MoveDir;
-            Map.ApplyMove(player, new Vector3Int(movePosInfo.PosX, movePosInfo.PosY, movePosInfo.PosZ));
+            info.WorldPosInfo.State = movePosInfo.State;
+            info.WorldPosInfo.PosX = movePosInfo.PosX;
+            info.WorldPosInfo.PosY = movePosInfo.PosY;
+            info.WorldPosInfo.PosZ = movePosInfo.PosZ;
+            //Map.ApplyMove(player, new Vector3Int(movePosInfo.PosX, movePosInfo.PosY, movePosInfo.PosZ));
 
             // 다른 플레이어한테도 알려준다.
-            S_Move resMovePacket = new S_Move();
+            S_WorldMove resMovePacket = new S_WorldMove();
             resMovePacket.ObjectId = player.Info.ObjectId;
-            resMovePacket.PosInfo = movePacket.PosInfo;
+            resMovePacket.WorldPosInfo = movePacket.WorldPosInfo;
 
             Broadcast(resMovePacket);
         }
