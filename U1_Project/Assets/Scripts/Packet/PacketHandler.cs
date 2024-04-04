@@ -67,7 +67,10 @@ class PacketHandler
             return;
 
         if (Managers.Object.MyPlayer.Id == movePacket.ObjectId)
+        {
+            Managers.Network._packetRecvTime = Time.time;
             return;
+        }
 
         BaseController bc = go.GetComponent<BaseController>();
         if (bc == null)

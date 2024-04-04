@@ -7,9 +7,9 @@ using UnityEngine;
 public class MyPlayerController : PlayerController
 {
     int _layerMask = 1 << (int)Define.Layer.Ground;
-    bool _moveKeyPressed = false;
+    bool _moveMouseClicked= false;
     Vector3 _destPos;
-
+    
     protected override void Init()
     {
         base.Init();
@@ -46,16 +46,18 @@ public class MyPlayerController : PlayerController
             // 플레이어 이동속도 하드코딩
             float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
             transform.position += dir.normalized * moveDist;
-            WorldPos = transform.position;
+            WorldPos = _destPos;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
             WorldRotation = transform.rotation;
         }
+
+        CheckUpdateMoveFlag();
     }
 
     protected override void UpdateIdle()
     {
         // 이동 상태로 갈지 확인
-        if (_moveKeyPressed)
+        if (_moveMouseClicked)
         {
             State = CreatureState.Moving;
             return;
@@ -83,8 +85,6 @@ public class MyPlayerController : PlayerController
 
     void OnMouseEvent(Define.MouseEvent evt)
     {
-        _moveKeyPressed = true;
-
         switch (State)
         {
             case CreatureState.Idle:
@@ -100,42 +100,59 @@ public class MyPlayerController : PlayerController
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        bool raycastHit = Physics.Raycast(ray, out hit, 100.0f, _layerMask);
-
+        bool raycastHit = Physics.Raycast(ray, out hit, 500.0f, _layerMask);
+            
         switch (evt)
         {
             case Define.MouseEvent.Click:
                 if (raycastHit)
                 {
+                    _moveMouseClicked = true;
                     _destPos = hit.point;
                     State = CreatureState.Moving;
                 }
                 break;
         }
-        CheckUpdatedFlag();
+      
     }
     
     protected override void MoveToNextPos()
     {
-        if (_moveKeyPressed == false)
-        {
-            State = CreatureState.Idle;
-            CheckUpdatedFlag();
-            return;
-        }
+        //if (_moveKeyPressed == false)
+        //{
+        //    State = CreatureState.Idle;
+        //    CheckUpdatedFlag();
+        //    return;
+        //}
 
-        CheckUpdatedFlag();
+        //CheckUpdatedFlag();
     }
 
+    int _cnt = 0;
     protected override void CheckUpdatedFlag()
     {
         if (_updated)
         {
+            _cnt++;
+            C_Move movePacket = new C_Move();
+            movePacket.PosInfo = PosInfo;
+            Managers.Network.Send(movePacket);
+            _updated = false;
+        }
+    }
+
+    protected void CheckUpdateMoveFlag()
+    {
+        if (_updated && _moveMouseClicked)
+        {
+            _cnt++;
             C_WorldMove movePacket = new C_WorldMove();
             movePacket.WorldPosInfo = WorldPosInfo;
             Managers.Network.Send(movePacket);
-            //Debug.Log("Test");
+            Managers.Network._packetSendTime = Time.time;
+            Debug.Log(_cnt);
             _updated = false;
+            _moveMouseClicked = false;
         }
     }
 }

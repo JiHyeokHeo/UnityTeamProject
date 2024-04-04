@@ -195,7 +195,7 @@ namespace Server.Game
 
             // 다른 플레이어한테도 알려준다.
             S_WorldMove resMovePacket = new S_WorldMove();
-            resMovePacket.ObjectId = player.Info.ObjectId;
+            resMovePacket.ObjectId = player.Info.ObjectId;  
             resMovePacket.WorldPosInfo = movePacket.WorldPosInfo;
 
             Broadcast(resMovePacket);

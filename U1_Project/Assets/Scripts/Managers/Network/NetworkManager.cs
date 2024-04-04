@@ -9,6 +9,14 @@ using Google.Protobuf;
 public class NetworkManager
 {
     ServerSession _session = new ServerSession();
+    public float _packetSendTime;
+    public float _packetRecvTime;
+
+    public float RoundTripLatency
+    {
+        get { return _packetRecvTime - _packetSendTime; }
+        private set { }
+    }
 
     public void Send(IMessage packet)
     {
@@ -40,5 +48,4 @@ public class NetworkManager
                 handler.Invoke(_session, packet.Message);
         }
     }
-
 }

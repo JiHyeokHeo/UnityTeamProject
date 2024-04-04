@@ -21,7 +21,7 @@ namespace Server.Game
         PriorityQueue<JobTimerElem> _pq = new PriorityQueue<JobTimerElem>();
         object _lock = new object();
 
-        public void Push(IJob job, int tickAfter = 0)
+        public void Push(IJob job, int tickAfter = 0)   
         {
             JobTimerElem jobElement;
             jobElement.execTick = System.Environment.TickCount + tickAfter;

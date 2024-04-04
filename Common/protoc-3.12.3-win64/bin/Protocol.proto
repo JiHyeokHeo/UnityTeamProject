@@ -114,6 +114,7 @@ message WorldPosInfo {
  float rotY = 5;
  float rotZ = 6;
  CreatureState state = 7;
+ float time = 8;
 }
 
 message PositionInfo {

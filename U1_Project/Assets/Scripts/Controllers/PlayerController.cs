@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerController : CreatureController
 {
     protected Coroutine _coSkill;
-
+    Vector3 _prevPos;
+    Quaternion _prevRotation;
     protected override void Init()
     {
         base.Init();
@@ -24,6 +25,10 @@ public class PlayerController : CreatureController
 
     protected override void UpdateMoving()
     {
+        // TODO 추측 항법 추가
+        _prevPos = WorldPos;
+        _prevRotation = WorldRotation;
+        float latency = Managers.Network.RoundTripLatency;
         transform.position = WorldPos;
         transform.rotation = WorldRotation;
     }
