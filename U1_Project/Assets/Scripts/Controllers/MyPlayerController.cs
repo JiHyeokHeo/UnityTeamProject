@@ -107,6 +107,7 @@ public class MyPlayerController : PlayerController
             case Define.MouseEvent.Click:
                 if (raycastHit)
                 {
+                    _prevPos = transform.position;
                     _moveMouseClicked = true;
                     _destPos = hit.point;
                     State = CreatureState.Moving;

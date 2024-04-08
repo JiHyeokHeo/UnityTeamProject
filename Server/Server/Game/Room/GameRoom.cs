@@ -191,6 +191,9 @@ namespace Server.Game
             info.WorldPosInfo.PosX = movePosInfo.PosX;
             info.WorldPosInfo.PosY = movePosInfo.PosY;
             info.WorldPosInfo.PosZ = movePosInfo.PosZ;
+            info.WorldPosInfo.RotX = movePosInfo.RotX;
+            info.WorldPosInfo.RotY = movePosInfo.RotY;
+            info.WorldPosInfo.RotZ = movePosInfo.RotZ;
             //Map.ApplyMove(player, new Vector3Int(movePosInfo.PosX, movePosInfo.PosY, movePosInfo.PosZ));
 
             // 다른 플레이어한테도 알려준다.

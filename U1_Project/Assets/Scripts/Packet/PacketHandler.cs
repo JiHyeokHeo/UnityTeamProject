@@ -68,7 +68,6 @@ class PacketHandler
 
         if (Managers.Object.MyPlayer.Id == movePacket.ObjectId)
         {
-            Managers.Network._packetRecvTime = Time.time;
             return;
         }
 
@@ -76,6 +75,7 @@ class PacketHandler
         if (bc == null)
             return;
 
+        Managers.Network._packetRecvTime = Time.time;
         bc.WorldPosInfo = movePacket.WorldPosInfo;
     }
 
