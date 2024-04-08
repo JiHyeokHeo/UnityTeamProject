@@ -26,7 +26,7 @@ public class PlayerController : CreatureController
     protected override void UpdateMoving()
     {
         Vector3 dir = WorldPos - transform.position;
-        if (dir.magnitude < 0.01f)
+        if (dir.magnitude < 0.1f)
         {
             State = CreatureState.Idle;
             return;
@@ -35,7 +35,8 @@ public class PlayerController : CreatureController
         dir.y = 0;
 
         float latency = Managers.Network.RoundTripLatency;
-        Vector3 predictedPosition = transform.position + dir.normalized * latency;
+        float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
+        Vector3 predictedPosition = transform.position + dir.normalized * moveDist * latency;
 
         transform.position = predictedPosition;
   
