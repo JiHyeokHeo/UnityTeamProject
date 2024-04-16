@@ -40,7 +40,7 @@ public class PlayerController : CreatureController
         transform.position = predictedPosition;
   
         _prevPos = WorldPos;
-        _prevRotation = WorldRotation;
+        //_prevRotation = WorldRotation;
     }
     public override void UseSkill(int skillId)
     {

@@ -22,8 +22,8 @@ public class CreatureController : BaseController
 
     protected void AddHpBar()
     {
-        GameObject go = Managers.Resource.Instantiate("UI/HpBar", transform);
-        go.transform.localPosition = new Vector3(0, 1.3f, 0);
+        GameObject go = Managers.Resource.Instantiate("UI/WorldSpace/UI_HPBar", transform);
+        go.transform.localPosition = transform.localPosition + new Vector3(0, 400.0f, 0);
         go.transform.rotation = Camera.main.transform.rotation;
         go.name = "HpBar";
         _hpBar = go.GetComponent<HpBar>();

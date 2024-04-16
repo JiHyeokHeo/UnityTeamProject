@@ -12,9 +12,11 @@ public class MyPlayerController : PlayerController
     
     protected override void Init()
     {
+        Hp = 100;
         base.Init();
         Managers.Input.MouseAction -= OnMouseEvent;
         Managers.Input.MouseAction += OnMouseEvent;
+        
     }
 
     protected override void UpdateController()
@@ -35,6 +37,7 @@ public class MyPlayerController : PlayerController
     protected override void UpdateMoving()
     {
         Vector3 dir = _destPos - transform.position;
+        dir.y = 0;
         if (dir.magnitude < 0.1f)
         {
             State = CreatureState.Idle;
@@ -46,7 +49,7 @@ public class MyPlayerController : PlayerController
             float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
             transform.position += dir.normalized * moveDist;
             WorldPos = _destPos;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
             WorldRotation = transform.rotation;
         }
 
