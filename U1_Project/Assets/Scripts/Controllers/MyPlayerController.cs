@@ -35,8 +35,7 @@ public class MyPlayerController : PlayerController
     protected override void UpdateMoving()
     {
         Vector3 dir = _destPos - transform.position;
-        dir.y = 0;
-        if (dir.magnitude < 0.01f)
+        if (dir.magnitude < 0.1f)
         {
             State = CreatureState.Idle;
             return;

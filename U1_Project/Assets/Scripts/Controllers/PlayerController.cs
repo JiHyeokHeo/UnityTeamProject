@@ -32,7 +32,6 @@ public class PlayerController : CreatureController
             return;
         }
 
-        dir.y = 0;
 
         float latency = Managers.Network.RoundTripLatency;
         float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
