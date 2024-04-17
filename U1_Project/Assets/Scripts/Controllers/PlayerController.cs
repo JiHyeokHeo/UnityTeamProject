@@ -26,6 +26,7 @@ public class PlayerController : CreatureController
     protected override void UpdateMoving()
     {
         Vector3 dir = WorldPos - transform.position;
+        dir.y = 0;
         if (dir.magnitude < 0.1f)
         {
             State = CreatureState.Idle;
@@ -33,14 +34,11 @@ public class PlayerController : CreatureController
         }
 
 
-        float latency = Managers.Network.RoundTripLatency;
         float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
-        Vector3 predictedPosition = transform.position + dir.normalized * moveDist * latency;
+        Vector3 predictedPosition = transform.position + dir.normalized * moveDist;
 
         transform.position = predictedPosition;
-  
-        _prevPos = WorldPos;
-        //_prevRotation = WorldRotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
     }
     public override void UseSkill(int skillId)
     {

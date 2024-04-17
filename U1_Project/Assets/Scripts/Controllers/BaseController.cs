@@ -97,10 +97,10 @@ public abstract class BaseController : MonoBehaviour
         {
             if (_worldPosInfo.Equals(value))
                 return;
-
+            
             WorldPos = new Vector3 (value.PosX, value.PosY, value.PosZ);
             State = value.State;
-            WorldRotation = new Quaternion (value.RotX, value.RotY, value.RotZ, 1); ;
+            WorldRotation = new Quaternion (value.RotX, value.RotY, value.RotZ, 1);
         }
     }
 

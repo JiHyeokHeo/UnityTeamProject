@@ -76,6 +76,7 @@ class PacketHandler
             return;
 
         Managers.Network._packetRecvTime = Time.time;
+        Managers.Network._packetSendTime = movePacket.WorldPosInfo.Time;
         bc.WorldPosInfo = movePacket.WorldPosInfo;
     }
 

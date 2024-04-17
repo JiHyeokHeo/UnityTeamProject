@@ -151,8 +151,8 @@ public class MyPlayerController : PlayerController
             _cnt++;
             C_WorldMove movePacket = new C_WorldMove();
             movePacket.WorldPosInfo = WorldPosInfo;
+            movePacket.WorldPosInfo.Time = Time.time;
             Managers.Network.Send(movePacket);
-            Managers.Network._packetSendTime = Time.time;
             Debug.Log(_cnt);
             _updated = false;
             _moveMouseClicked = false;

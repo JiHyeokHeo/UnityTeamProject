@@ -209,7 +209,6 @@ namespace Server.Game
             if (player == null)
                 return;
 
-
             ObjectInfo info = player.Info;
             if (info.PosInfo.State != CreatureState.Idle)
                 return;

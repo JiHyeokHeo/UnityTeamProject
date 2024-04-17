@@ -14,7 +14,7 @@ public class HpBar : MonoBehaviour
     {
         ratio = Mathf.Clamp01(ratio);
         //go.transform.rotation = Camera.main.transform.rotation;
-        //_hpBar.localScale = new Vector3(ratio, 1, 1);
+        //transform.localScale = new Vector3(ratio, 1, 1);
     }
 
     private void Update()

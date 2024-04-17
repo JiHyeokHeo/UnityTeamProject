@@ -30,20 +30,20 @@ public class ObjectManager
 
                 MyPlayer = go.GetComponent<MyPlayerController>();
                 MyPlayer.Id = info.ObjectId;
-                MyPlayer.PosInfo = info.PosInfo;
+                //MyPlayer.PosInfo = info.PosInfo;
 				MyPlayer.WorldPosInfo = info.WorldPosInfo;
 				MyPlayer.Stat = info.StatInfo;
                 MyPlayer.SyncWorldPos();
             }
             else
             {
-                GameObject go = Managers.Resource.Instantiate("Creature/Player");
+                GameObject go = Managers.Resource.Instantiate("Creature/project_-jax2");
                 go.name = info.Name;
                 _objects.Add(info.ObjectId, go);
 
                 PlayerController pc = go.GetComponent<PlayerController>();
                 pc.Id = info.ObjectId;
-                pc.PosInfo = info.PosInfo;
+                //pc.PosInfo = info.PosInfo;
 				pc.WorldPosInfo = info.WorldPosInfo;
                 pc.Stat = info.StatInfo;
                 pc.SyncWorldPos();
