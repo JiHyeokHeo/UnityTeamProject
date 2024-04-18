@@ -6,7 +6,7 @@ namespace Server.Game
 {
     public class JobSerializer
     {
-        JobTimer _timer = new JobTimer();
+        JobTimer _timer  = new JobTimer();
         Queue<IJob> _jobQueue = new Queue<IJob>();
         object _lock = new object();
         bool _flush = false;

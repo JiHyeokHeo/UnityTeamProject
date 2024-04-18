@@ -27,17 +27,19 @@ public class PlayerController : CreatureController
     {
         Vector3 dir = WorldPos - transform.position;
         dir.y = 0;
-        if (dir.magnitude < 0.1f)
+
+        if (dir.sqrMagnitude < 0.01f)
         {
             State = CreatureState.Idle;
             return;
         }
 
+        float packetLatency = Managers.Network.RoundTripLatency;
+        Vector3 predictedPosition = transform.position + dir.normalized * packetLatency * 100.0f;
 
-        float moveDist = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
-        Vector3 predictedPosition = transform.position + dir.normalized * moveDist;
+        float maxMoveDistance = Mathf.Clamp(100.0f * Time.deltaTime, 0, dir.magnitude);
+        transform.position = Vector3.MoveTowards(transform.position, predictedPosition, maxMoveDistance);
 
-        transform.position = predictedPosition;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
     }
     public override void UseSkill(int skillId)

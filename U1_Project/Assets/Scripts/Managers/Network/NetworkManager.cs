@@ -14,7 +14,7 @@ public class NetworkManager
 
     public float RoundTripLatency
     {
-        get { return _packetRecvTime - _packetSendTime; }
+        get { return ((_packetRecvTime - _packetSendTime)) / 2 ; }
         private set { }
     }
 

@@ -1,8 +1,10 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using ServerCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 class PacketHandler
@@ -68,6 +70,9 @@ class PacketHandler
 
         if (Managers.Object.MyPlayer.Id == movePacket.ObjectId)
         {
+            Managers.Network._packetRecvTime = DateTime.Now.Millisecond / 1000.0f + DateTime.Now.Second;
+            if (Managers.Network._packetRecvTime < Managers.Network._packetSendTime)
+                Managers.Network._packetRecvTime += 60;
             return;
         }
 
@@ -75,8 +80,10 @@ class PacketHandler
         if (bc == null)
             return;
 
-        Managers.Network._packetRecvTime = Time.time;
         Managers.Network._packetSendTime = movePacket.WorldPosInfo.Time;
+        Managers.Network._packetRecvTime = DateTime.Now.Millisecond / 1000.0f + DateTime.Now.Second;
+        if (Managers.Network._packetRecvTime < Managers.Network._packetSendTime)
+            Managers.Network._packetRecvTime += 60;
         bc.WorldPosInfo = movePacket.WorldPosInfo;
     }
 

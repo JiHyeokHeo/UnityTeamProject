@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Server.Game.Room;
 using Server.Game;
+using System.Threading;
 
 class PacketHandler
 {
@@ -40,7 +41,7 @@ class PacketHandler
 		GameRoom room = player.Room;
 		if (room == null)
 			return;
-
+		
 		room.Push(room.HandleMove, player, worldMovePacket);
     }
 

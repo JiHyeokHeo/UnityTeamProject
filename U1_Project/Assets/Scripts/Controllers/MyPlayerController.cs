@@ -1,6 +1,8 @@
 using Google.Protobuf.Protocol;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
@@ -151,7 +153,8 @@ public class MyPlayerController : PlayerController
             _cnt++;
             C_WorldMove movePacket = new C_WorldMove();
             movePacket.WorldPosInfo = WorldPosInfo;
-            movePacket.WorldPosInfo.Time = Time.time;
+            movePacket.WorldPosInfo.Time = DateTime.Now.Millisecond / 1000.0f + DateTime.Now.Second;
+            Managers.Network._packetSendTime = movePacket.WorldPosInfo.Time;
             Managers.Network.Send(movePacket);
             Debug.Log(_cnt);
             _updated = false;
